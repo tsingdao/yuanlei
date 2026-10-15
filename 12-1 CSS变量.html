@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-1 CSS 变量</title>
+    <style>
+        /* ========== 定义 CSS 变量 ========== */
+        :root {
+            --yuan_primary: #2c3e50;
+            --yuan_accent: #e74c3c;
+            --yuan_bg: #ecf0f1;
+            --yuan_card: #ffffff;
+            --yuan_text: #34495e;
+            --yuan_muted: #7f8c8d;
+            --yuan_radius: 12px;
+            --yuan_shadow: 0 4px 24px rgba(44, 62, 80, .12);
+            --yuan_spacing: 24px;
+            --yuan_transition: .3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--yuan_bg);
+            color: var(--yuan_text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ========== 导航栏 ========== */
+        .yuan_nav {
+            background: var(--yuan_primary);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .yuan_logo {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .yuan_logo span {
+            color: var(--yuan_accent);
+        }
+
+        .yuan_nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .yuan_nav-links a {
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--yuan_transition);
+        }
+
+        .yuan_nav-links a:hover {
+            color: #fff;
+        }
+
+        /* ========== Hero 区域 ========== */
+        .yuan_hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: linear-gradient(135deg, var(--yuan_primary) 0%, #34495e 100%);
+            color: #fff;
+        }
+
+        .yuan_hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 16px;
+            letter-spacing: -.02em;
+        }
+
+        .yuan_hero p {
+            font-size: 18px;
+            opacity: .85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .yuan_hero .yuan_highlight {
+            color: var(--yuan_accent);
+            font-weight: 700;
+        }
+
+        /* ========== 变量展示卡片 ========== */
+        .yuan_container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .yuan_section-title {
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: var(--yuan_primary);
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .yuan_section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 2px;
+            background: var(--yuan_accent);
+        }
+
+        .yuan_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--yuan_spacing);
+        }
+
+        .yuan_card {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 28px;
+            box-shadow: var(--yuan_shadow);
+            transition: var(--yuan-transition);
+            border: 1px solid rgba(44,62,80,.08);
+        }
+
+        .yuan_card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(44,62,80,.18);
+        }
+
+        .yuan_card h3 {
+            font-size: 17px;
+            color: var(--yuan_primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .yuan_card h3 .yuan_dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .yuan_card p {
+            font-size: 14px;
+            color: var(--yuan_muted);
+            margin-bottom: 14px;
+        }
+
+        .yuan_card code {
+            display: block;
+            background: var(--yuan_bg);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--yuan_text);
+            font-family: "Cascadia Code", "Consolas", monospace;
+            border-left: 3px solid var(--yuan_accent);
+        }
+
+        /* ========== 交互演示区域 ========== */
+        .yuan_demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .yuan_demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .yuan_btn {
+            padding: 10px 24px;
+            border: 2px solid var(--yuan_primary);
+            background: transparent;
+            color: var(--yuan_primary);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--yuan-transition);
+        }
+
+        .yuan_btn:hover {
+            background: var(--yuan_primary);
+            color: #fff;
+        }
+
+        .yuan_btn.yuan_active {
+            background: var(--yuan_accent);
+            border-color: var(--yuan_accent);
+            color: #fff;
+        }
+
+        .yuan_preview-box {
+            width: 100%;
+            max-width: 480px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: var(--yuan_radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            background: var(--yuan_primary);
+            transition: var(--yuan-transition);
+        }
+
+        .yuan_preview-box.yuan_theme-ocean { background: #3498db; }
+        .yuan_preview-box.yuan_theme-forest { background: #27ae60; }
+        .yuan_preview-box.yuan_theme-sunset { background: #e67e22; }
+
+        /* ========== 代码说明区域 ========== */
+        .yuan_code-section {
+            margin-top: 40px;
+            background: var(--yuan_primary);
+            border-radius: var(--yuan_radius);
+            padding: 36px;
+            color: #fff;
+        }
+
+        .yuan_code-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--yuan_accent);
+        }
+
+        .yuan_code-section pre {
+            background: rgba(0,0,0,.3);
+            padding: 24px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Cascadia Code", "Consolas", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .yuan_code-section .yuan_comment { color: #7f8c8d; }
+        .yuan_code-section .yuan_property { color: #3498db; }
+        .yuan_code-section .yuan_value { color: #e67e22; }
+
+        /* ========== 页脚 ========== */
+        .yuan_footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: var(--yuan_muted);
+            font-size: 14px;
+            border-top: 1px solid rgba(44,62,80,.1);
+        }
+
+        .yuan_footer strong {
+            color: var(--yuan_primary);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .yuan_nav { padding: 14px 20px; }
+            .yuan_nav-links { display: none; }
+            .yuan_hero { padding: 50px 20px 40px; }
+            .yuan_container { padding: 40px 16px 60px; }
+            .yuan_demo { padding: 24px; }
+            .yuan_code-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="yuan_nav">
+        <a class="yuan_logo" href="index.html">袁磊<span>·</span>CSS 变量</a>
+        <ul class="yuan_nav-links">
+            <li><a href="#yuan_demo">在线演示</a></li>
+            <li><a href="#yuan_code">代码</a></li>
+            <li><a href="index.html">返回首页</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="yuan_hero">
+        <h1>CSS 变量 <span class="yuan_highlight">Custom Properties</span></h1>
+        <p>用 <strong>袁磊</strong> 的方式学习 CSS 自定义属性 — 定义一次，全局复用，轻松实现主题切换。</p>
+    </header>
+
+    <main class="yuan_container">
+
+        <!-- 变量卡片展示 -->
+        <h2 class="yuan_section-title">常用 CSS 变量</h2>
+        <div class="yuan_grid">
+            <div class="yuan_card">
+                <h3><span class="yuan_dot" style="background:#2c3e50"></span>--yuan_primary</h3>
+                <p>主色调，用于标题、导航栏和按钮等核心元素。</p>
+                <code>--yuan_primary: #2c3e50;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan_dot" style="background:#e74c3c"></span>--yuan_accent</h3>
+                <p>强调色，用于高亮、悬停状态和重点标注。</p>
+                <code>--yuan_accent: #e74c3c;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#ecf0f1"></span>--yuan_bg</h3>
+                <p>页面背景色，营造整体视觉基调。</p>
+                <code>--yuan_bg: #ecf0f1;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#ffffff"></span>--yuan_card</h3>
+                <p>卡片背景色，用于内容区块和面板。</p>
+                <code>--yuan_card: #ffffff;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#7f8c8d"></span>--yuan_muted</h3>
+                <p>辅助文字色，用于次要说明和描述文本。</p>
+                <code>--yuan_muted: #7f8c8d;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#9b59b6"></span>--yuan_radius</h3>
+                <p>圆角大小，统一控制元素的圆角风格。</p>
+                <code>--yuan_radius: 12px;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#27ae60"></span>--yuan_transition</h3>
+                <p>过渡时间，控制状态切换的动画速度。</p>
+                <code>--yuan_transition: .3s ease;</code>
+            </div>
+            <div class="yuan_card">
+                <h3><span class="yuan-dot" style="background:#3498db"></span>--yuan_shadow</h3>
+                <p>阴影参数，为卡片和面板添加层次感。</p>
+                <code>--yuan_shadow: 0 4px 24px rgba(...);</code>
+            </div>
+        </div>
+
+        <!-- 交互演示 -->
+        <div class="yuan_demo" id="yuan_demo">
+            <h3>点击切换主题色</h3>
+            <p>下方预览框的颜色由 CSS 变量控制，切换变量即可改变外观。</p>
+            <div class="yuan_btn-group">
+                <button class="yuan_btn yuan_active" onclick="yuanSetTheme('default')">默认</button>
+                <button class="yuan_btn" onclick="yuanSetTheme('ocean')">海洋</button>
+                <button class="yuan_btn" onclick="yuanSetTheme('forest')">森林</button>
+                <button class="yuan_btn" onclick="yuanSetTheme('sunset')">日落</button>
+            </div>
+            <div class="yuan_preview-box" id="yuan_preview">
+                袁磊的 CSS 变量演示
+            </div>
+        </div>
+
+        <!-- 代码说明 -->
+        <div class="yuan_code-section" id="yuan_code">
+            <h3>核心代码</h3>
+            <pre><span class="yuan_comment">/* 在 :root 中定义变量 */</span>
+<span class="yuan_property">:root</span> {
+    <span class="yuan_property">--yuan_primary</span>: <span class="yuan-value">#2c3e50</span>;
+    <span class="yuan-property">--yuan_accent</span>: <span class="yuan-value">#e74c3c</span>;
+    <span class="yuan-property">--yuan_bg</span>: <span class="yuan-value">#ecf0f1</span>;
+}
+
+<span class="yuan_comment">/* 使用 var() 引用变量 */</span>
+<span class="yuan-property">.yuan_card</span> {
+    <span class="yuan-property">background</span>: <span class="yuan-value">var(--yuan_card)</span>;
+    <span class="yuan-property">border-radius</span>: <span class="yuan-value">var(--yuan_radius)</span>;
+    <span class="yuan-property">box-shadow</span>: <span class="yuan-value">var(--yuan_shadow)</span>;
+}</pre>
+        </div>
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="yuan_footer">
+        <p><strong>袁磊</strong> · 526 · 《高级网页设计》课堂实践 · 第 12 讲 CSS 变量</p>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        function yuanSetTheme(theme) {
+            const preview = document.getElementById('yuan_preview');
+            const buttons = document.querySelectorAll('.yuan_btn');
+
+            // 移除所有主题类和激活状态
+            preview.classList.remove('yuan_theme-ocean', 'yuan_theme-forest', 'yuan_theme-sunset');
+            buttons.forEach(function(btn) {
+                btn.classList.remove('yuan_active');
+            });
+
+            // 设置新主题
+            if (theme === 'ocean') {
+                preview.classList.add('yuan_theme-ocean');
+                document.documentElement.style.setProperty('--yuan_primary', '#3498db');
+            } else if (theme === 'forest') {
+                preview.classList.add('yuan_theme-forest');
+                document.documentElement.style.setProperty('--yuan_primary', '#27ae60');
+            } else if (theme === 'sunset') {
+                preview.classList.add('yuan_theme-sunset');
+                document.documentElement.style.setProperty('--yuan_primary', '#e67e22');
+            }
+
+            // 标记当前按钮为激活
+            event.target.classList.add('yuan_active');
+        }
+    </script>
+
+</body>
+</html>
