@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flex 演示</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", sans-serif;
+      background: #f3f5f9;
+    }
+
+    .page {
+      width: calc(100% - 40px);
+      min-width: 980px;
+      margin: 30px auto;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: 36px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    li {
+      width: 240px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    .demo-box {
+      height: 220px;
+      border: 1px solid #999;
+      background: #f9f9f9;
+      padding: 10px;
+    }
+
+    .demo-1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mini {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #000;
+      background: #ddd;
+    }
+
+    .demo-2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .demo-2 .mini {
+      width: 80px;
+      height: 50px;
+    }
+
+    .demo-3 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .demo-3 .mini {
+      width: calc(50% - 5px);
+      height: 60px;
+    }
+
+    .demo-4 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+    }
+
+    .demo-4 .mini {
+      height: 60px;
+    }
+
+    .demo-4 .mini:first-child {
+      width: 100%;
+    }
+
+    .demo-4 .mini:nth-child(2),
+    .demo-4 .mini:nth-child(3) {
+      width: calc(50% - 5px);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Flex 布局演示</h1>
+
+    <ul>
+      <li>
+        <div class="demo-box demo-1">
+          <div class="mini"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="demo-box demo-2">
+          <div class="mini"></div>
+          <div class="mini"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="demo-box demo-3">
+          <div class="mini"></div>
+          <div class="mini"></div>
+          <div class="mini"></div>
+          <div class="mini"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="demo-box demo-4">
+          <div class="mini"></div>
+          <div class="mini"></div>
+          <div class="mini"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-2 CSS 幻灯片</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #191b25, #403b63);
+      color: #fff;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    .slideshow {
+      width: min(900px, 100%);
+      overflow: hidden;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .slideshow__header {
+      padding: 22px 28px;
+      color: #22232b;
+      text-align: center;
+    }
+
+    .slideshow__header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    .slideshow__header p {
+      margin: 0;
+      color: #6b6b76;
+      font-size: 1rem;
+    }
+
+    .slideshow__viewport {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #d8d8df;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      opacity: 0;
+      transform: scale(1.03);
+      animation: show-slide 12s infinite;
+    }
+
+    .slide:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .slide:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slide:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    .slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .slide__caption {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      left: 28px;
+      padding: 15px 20px;
+      border-radius: 12px;
+      background: rgba(17, 18, 25, 0.72);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .slide__caption strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+    }
+
+    .slide__caption span {
+      color: #e9e9ee;
+      font-size: 0.92rem;
+    }
+
+    @keyframes show-slide {
+      0%, 20% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      25%, 95% {
+        opacity: 0;
+        transform: scale(1.03);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.03);
+      }
+    }
+
+    .slideshow__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .slideshow__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #c8c8d0;
+      animation: dot-color 12s infinite;
+    }
+
+    .slideshow__dot:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slideshow__dot:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    @keyframes dot-color {
+      0%, 20% { background: #6c63ff; transform: scale(1.35); }
+      25%, 95% { background: #c8c8d0; transform: scale(1); }
+      100% { background: #c8c8d0; transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .slideshow {
+        border-radius: 18px;
+      }
+
+      .slideshow__header {
+        padding: 18px;
+      }
+
+      .slide {
+        padding: 14px;
+      }
+
+      .slide__caption {
+        right: 14px;
+        bottom: 14px;
+        left: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="slideshow">
+    <header class="slideshow__header">
+      <h1>袁磊</h1>
+      <p>基于 CSS animation 的图片幻灯片</p>
+    </header>
+
+    <section class="slideshow__viewport" aria-label="袁磊图片幻灯片">
+      <figure class="slide">
+        <img src="img/1.jpg" alt="袁磊图片一">
+        <figcaption class="slide__caption">
+          <strong>图片一</strong>
+          <span>袁磊的照片展示</span>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="img/2.jpg" alt="袁磊图片二">
+        <figcaption class="slide__caption">
+          <strong>图片二</strong>
+          <span>袁磊的照片展示</span>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="img/3.jpg" alt="袁磊图片三">
+        <figcaption class="slide__caption">
+          <strong>图片三</strong>
+          <span>袁磊的照片展示</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <footer class="slideshow__footer" aria-hidden="true">
+      <span class="slideshow__dot"></span>
+      <span class="slideshow__dot"></span>
+      <span class="slideshow__dot"></span>
+    </footer>
+  </main>
+</body>
+</html>

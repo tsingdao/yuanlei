@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>袁磊 — 个人名片</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg1:#f6d365;--bg2:#fda085;--card:#ffffff;--accent:#6b46c1}
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,helvetica,Arial;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center}
+        .card{width:min(760px,92%);background:rgba(255,255,255,0.9);border-radius:14px;padding:34px;box-shadow:0 10px 30px rgba(0,0,0,0.12);text-align:center}
+        .logo{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--accent),#ff7eb3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:28px}
+        h1{margin:6px 0 0;font-size:32px;color:#111}
+        p{margin:8px 0 0;color:#444;font-size:18px}
+        .meta{margin-top:18px;color:#666;font-size:14px}
+        @media (max-width:480px){.card{padding:20px}.logo{width:80px;height:80px;font-size:22px}h1{font-size:24px}p{font-size:16px}}
+    </style>
+</head>
+<body>
+    <main class="card" role="main">
+        <div class="logo">513</div>
+        <h1>袁磊</h1>
+        <p>前端开发 · 视觉设计</p>
+        <div class="meta">让页面更简洁、更美观、更具吸引力</div>
+    </main>
+</body>
+</html>

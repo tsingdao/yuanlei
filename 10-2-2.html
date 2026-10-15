@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-2-2 CSS动画幻灯片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      font-family: -apple-system, "Microsoft YaHei", sans-serif;
+    }
+
+    /* ===== 幻灯片容器 ===== */
+    .yuan-slider {
+      position: relative;
+      width: 340px;
+      height: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ===== 单张幻灯片：上图下文 ===== */
+    .yuan-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      /* 三张轮播，12s 一轮，用负延迟错开相位 */
+      animation: yuan-fade 12s linear infinite;
+      opacity: 0;
+    }
+
+    .yuan-slide:nth-child(2) { animation-delay: -4s; }
+    .yuan-slide:nth-child(3) { animation-delay: -8s; }
+
+    .yuan-slide img {
+      width: 100%;
+      height: 300px;   /* 上图 */
+      object-fit: cover;
+      display: block;
+    }
+
+    .yuan-caption {
+      flex: 1;         /* 下文 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .yuan-caption h2 {
+      font-size: 20px;
+      color: #1a1a2e;
+    }
+
+    .yuan-caption p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* 交叉淡化关键帧：每张显示 4s（1/3 周期） */
+    @keyframes yuan-fade {
+      0%    { opacity: 1; }
+      30%   { opacity: 1; }
+      36%   { opacity: 0; }
+      97%   { opacity: 0; }
+      100%  { opacity: 1; }
+    }
+
+    /* ===== 指示点：与当前幻灯片同步高亮 ===== */
+    .yuan-dots {
+      display: flex;
+      gap: 12px;
+    }
+
+    .yuan-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      animation: yuan-dot 12s linear infinite;
+    }
+
+    .yuan-dots span:nth-child(2) { animation-delay: -4s; }
+    .yuan-dots span:nth-child(3) { animation-delay: -8s; }
+
+    @keyframes yuan-dot {
+      0%   { background: #ffe66d; box-shadow: 0 0 10px #ffe66d; }
+      30%  { background: #ffe66d; box-shadow: 0 0 10px #ffe66d; }
+      36%  { background: rgba(255, 255, 255, 0.35); box-shadow: none; }
+      97%  { background: rgba(255, 255, 255, 0.35); box-shadow: none; }
+      100% { background: #ffe66d; box-shadow: 0 0 10px #ffe66d; }
+    }
+
+    /* ===== 页面文字 ===== */
+    .yuan-author {
+      color: #fff;
+      font-size: 16px;
+      letter-spacing: 3px;
+      opacity: 0.85;
+    }
+
+    /* 悬浮发光效果 */
+    .yuan-slider:hover {
+      box-shadow: 0 16px 60px rgba(78, 205, 196, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="yuan-slider">
+    <div class="yuan-slide">
+      <img src="img/1.jpg" alt="风景一">
+      <div class="yuan-caption">
+        <h2>风景一</h2>
+        <p>袁磊 · CSS 动画幻灯片演示</p>
+      </div>
+    </div>
+    <div class="yuan-slide">
+      <img src="img/2.jpg" alt="风景二">
+      <div class="yuan-caption">
+        <h2>风景二</h2>
+        <p>袁磊 · 纯 CSS 实现自动轮播</p>
+      </div>
+    </div>
+    <div class="yuan-slide">
+      <img src="img/3.jpg" alt="风景三">
+      <div class="yuan-caption">
+        <h2>风景三</h2>
+        <p>袁磊 · 每张停留 4 秒循环播放</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="yuan-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <p class="yuan-author">作者：袁磊</p>
+</body>
+</html>

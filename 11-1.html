@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长度单位 · 高级网页设计</title>
+    <style>
+        :root {
+            --bg: #0d1b2e;
+            --panel: rgba(17, 34, 58, .72);
+            --line: rgba(110, 231, 255, .22);
+            --line-strong: rgba(110, 231, 255, .55);
+            --ink: #e9f2ff;
+            --muted: #8ba3c0;
+            --cyan: #6ee7ff;
+            --amber: #ffcf6e;
+            --coral: #ff7a59;
+            --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+            --sans: "Segoe UI", "Microsoft YaHei", sans-serif;
+            --mono: "SF Mono", Consolas, "Courier New", monospace;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(ellipse 90% 60% at 50% -10%, rgba(110, 231, 255, .12), transparent 65%),
+                linear-gradient(rgba(110, 231, 255, .055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(110, 231, 255, .055) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
+            font-family: var(--sans);
+            line-height: 1.8;
+        }
+
+        a { color: var(--cyan); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .shell {
+            width: min(1120px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* ---------- header / hero ---------- */
+
+        .back-link {
+            display: inline-block;
+            padding: 22px 0 0;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .14em;
+            color: var(--muted);
+        }
+
+        .hero {
+            position: relative;
+            padding: 40px 0 0;
+            overflow: hidden;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .16em;
+            color: var(--cyan);
+            border-top: 1px solid var(--line-strong);
+            padding-top: 14px;
+        }
+
+        .hero-meta span:last-child { color: var(--muted); }
+
+        h1 {
+            margin: 30px 0 10px;
+            font-family: var(--serif);
+            font-size: clamp(3rem, 9vw, 6.4rem);
+            line-height: 1.05;
+            letter-spacing: .02em;
+            font-weight: 900;
+        }
+
+        h1 em {
+            display: block;
+            color: var(--coral);
+            font-size: .38em;
+            font-style: normal;
+            letter-spacing: .06em;
+        }
+
+        .hero-note {
+            max-width: 460px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 60px;
+            right: -10px;
+            color: transparent;
+            font-family: var(--serif);
+            font-size: clamp(9rem, 20vw, 17rem);
+            line-height: .8;
+            font-weight: 900;
+            letter-spacing: -.05em;
+            -webkit-text-stroke: 1px rgba(110, 231, 255, .28);
+            opacity: .35;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ruler strip: minor tick = 10px, major tick = 50px */
+        .ruler {
+            height: 30px;
+            margin: 42px 0 10px;
+            border-bottom: 1px solid var(--line-strong);
+            background:
+                repeating-linear-gradient(90deg, var(--cyan) 0 1px, transparent 1px 50px) bottom left / 100% 15px no-repeat,
+                repeating-linear-gradient(90deg, rgba(110, 231, 255, .5) 0 1px, transparent 1px 10px) bottom left / 100% 8px no-repeat;
+        }
+
+        .ruler-caption {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .12em;
+            color: var(--muted);
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* ---------- sections ---------- */
+
+        section { padding: 74px 0 10px; }
+
+        .sec-head {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 8px;
+        }
+
+        .sec-no {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--bg);
+            background: var(--cyan);
+            padding: 3px 9px;
+            letter-spacing: .1em;
+        }
+
+        .sec-head h2 {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: .04em;
+        }
+
+        .sec-en {
+            margin-left: auto;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .28em;
+            color: var(--muted);
+        }
+
+        .sec-desc {
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 14px;
+            margin: 6px 0 30px;
+        }
+
+        .panel {
+            position: relative;
+            margin-top: 18px;
+            padding: 26px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+        }
+
+        .fig {
+            position: absolute;
+            top: -10px;
+            right: 14px;
+            padding: 0 10px;
+            background: var(--bg);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .22em;
+            color: var(--cyan);
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 1px 9px;
+            border: 1px solid var(--line-strong);
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--cyan);
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ---------- absolute units ---------- */
+
+        .abs-stage {
+            display: flex;
+            align-items: flex-end;
+            gap: 34px;
+            min-height: 190px;
+            padding: 26px 0 8px;
+            flex-wrap: wrap;
+        }
+
+        .abs-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .abs-box {
+            border: 1px solid var(--cyan);
+            background: rgba(110, 231, 255, .08);
+            box-shadow: 0 0 0 1px rgba(110, 231, 255, .12) inset;
+        }
+
+        .abs-item .u {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--cyan);
+        }
+
+        .abs-item .px {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .abs-formula {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--line);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            color: var(--muted);
+        }
+
+        .abs-formula b { color: var(--amber); font-weight: 600; }
+
+        /* ---------- em / rem demo ---------- */
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        @media (max-width: 760px) {
+            .demo-grid { grid-template-columns: 1fr; }
+        }
+
+        .demo-col-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 15px;
+            padding: 2px 12px;
+            letter-spacing: .08em;
+        }
+
+        .tag.em { color: var(--bg); background: var(--amber); }
+        .tag.rem { color: var(--bg); background: var(--cyan); }
+
+        .nest {
+            border: 2px solid var(--line-strong);
+            padding: 14px;
+        }
+
+        .nest .child {
+            margin-top: 10px;
+            padding: 12px;
+        }
+
+        .em-root { font-size: var(--demo-base, 16px); border-color: var(--amber); }
+        .em-l2 { font-size: 1.5em; border: 2px dashed var(--amber); }
+        .em-l3 { font-size: 1.5em; border: 2px dotted var(--coral); }
+
+        .rem-root { font-size: var(--demo-base, 16px); border-color: var(--cyan); }
+        .rem-l2 { font-size: 1.5rem; border: 2px dashed var(--cyan); }
+        .rem-l3 { font-size: 1.5rem; border: 2px dotted var(--cyan); }
+
+        .nest-label {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+
+        .nest-label .v { color: var(--amber); }
+        .rem-label .v { color: var(--cyan); }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            background: rgba(13, 27, 46, .6);
+        }
+
+        .slider-row label {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .slider-row input[type="range"] {
+            flex: 1;
+            min-width: 180px;
+            accent-color: var(--cyan);
+        }
+
+        .slider-val {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--amber);
+            min-width: 48px;
+        }
+
+        /* ---------- viewport units ---------- */
+
+        .vp-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 26px;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            border: 1px dashed var(--line-strong);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            color: var(--cyan);
+            background: rgba(110, 231, 255, .05);
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            align-items: center;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .bar-row .code {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .bar {
+            height: 26px;
+            border-left: 3px solid var(--cyan);
+            background: repeating-linear-gradient(-45deg, rgba(110, 231, 255, .22) 0 8px, rgba(110, 231, 255, .07) 8px 16px);
+            animation: grow .9s cubic-bezier(.2, .8, .2, 1) both;
+            transform-origin: left;
+        }
+
+        .bar.b2 { animation-delay: .12s; }
+        .bar.b3 { animation-delay: .24s; }
+
+        @keyframes grow {
+            from { transform: scaleX(0); }
+        }
+
+        .vmin-stage {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .vmin-box {
+            width: 34vmin;
+            height: 34vmin;
+            max-width: 280px;
+            max-height: 280px;
+            border: 1px solid var(--coral);
+            background: rgba(255, 122, 89, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--coral);
+            text-align: center;
+            padding: 12px;
+        }
+
+        /* ---------- ch / ex ---------- */
+
+        .mono { font-family: var(--mono); }
+
+        .ch-box {
+            width: 20ch;
+            padding: 10px 0;
+            border: 1px solid var(--cyan);
+            background: rgba(110, 231, 255, .07);
+            font-family: var(--mono);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--amber);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ex-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .ex-box {
+            height: 2ex;
+            border: 1px dashed var(--coral);
+            background: rgba(255, 122, 89, .08);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            color: var(--coral);
+        }
+
+        .ex-row .code {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        /* ---------- table ---------- */
+
+        .unit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .unit-table th,
+        .unit-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+
+        .unit-table th {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .2em;
+            color: var(--muted);
+            font-weight: 400;
+            border-bottom: 1px solid var(--line-strong);
+        }
+
+        .unit-table td:first-child {
+            font-family: var(--mono);
+            font-weight: 700;
+            color: var(--cyan);
+            white-space: nowrap;
+        }
+
+        .unit-table .who { color: var(--amber); }
+
+        /* ---------- tips ---------- */
+
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 760px) {
+            .tips { grid-template-columns: 1fr; }
+        }
+
+        .tip {
+            padding: 20px 22px;
+            border: 1px solid var(--line);
+            background: rgba(13, 27, 46, .55);
+            transition: transform .25s ease, border-color .25s ease;
+        }
+
+        .tip:hover {
+            transform: translateY(-4px);
+            border-color: var(--line-strong);
+        }
+
+        .tip .n {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .24em;
+            color: var(--coral);
+        }
+
+        .tip h3 {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+
+        .tip p {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--muted);
+        }
+
+        .tip code {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--cyan);
+        }
+
+        /* ---------- footer ---------- */
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 90px;
+            padding: 22px 0 40px;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        footer a { font-size: 12px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <a class="back-link" href="index.html">← 返回作品索引</a>
+
+        <header class="hero">
+            <span class="watermark" aria-hidden="true">11</span>
+            <div class="hero-meta">
+                <span>11-1.HTML — 高级网页设计</span>
+                <span>课堂练习 / 2025—2026</span>
+            </div>
+            <h1>长度<em>从 1px，到一整屏。</em></h1>
+            <p class="hero-note">px、in、em、rem、vw、ch…… 网页里每一个尺寸都有「参照物」。这一页把所有长度单位放在同一张蓝图上量一量。</p>
+            <div class="ruler" aria-hidden="true"></div>
+            <p class="ruler-caption">标尺刻度 —— 每一小格 = 10px · 每一大格 = 50px</p>
+        </header>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">01</span>
+                <h2>绝对单位</h2>
+                <span class="sec-en">ABSOLUTE UNITS</span>
+            </div>
+            <p class="sec-desc">不依赖任何参照物的「硬尺寸」。屏幕上约定 <span class="chip">1in = 96px</span>（即 96 DPI），其余物理单位都由它推算。注意小尺寸单位在屏幕上有多微小。</p>
+
+            <div class="panel">
+                <span class="fig">FIG. 01 / 实际渲染尺寸</span>
+                <div class="abs-stage">
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:96px;height:96px"></div>
+                        <span class="u">1in</span>
+                        <span class="px">= 96px</span>
+                    </div>
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:1pc;height:16px"></div>
+                        <span class="u">1pc</span>
+                        <span class="px">= 12pt = 16px</span>
+                    </div>
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:1cm;height:1cm"></div>
+                        <span class="u">1cm</span>
+                        <span class="px">≈ 37.8px</span>
+                    </div>
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:10mm;height:10mm"></div>
+                        <span class="u">10mm</span>
+                        <span class="px">≈ 37.8px</span>
+                    </div>
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:72pt;height:4px"></div>
+                        <span class="u">72pt</span>
+                        <span class="px">= 1in = 96px</span>
+                    </div>
+                    <div class="abs-item">
+                        <div class="abs-box" style="width:1q;height:1q"></div>
+                        <span class="u">1q</span>
+                        <span class="px">≈ 0.94px</span>
+                    </div>
+                </div>
+                <div class="abs-formula">
+                    <span>1in = <b>96px</b> = 2.54cm</span>
+                    <span>1cm ≈ <b>37.8px</b></span>
+                    <span>1mm ≈ <b>3.78px</b></span>
+                    <span>1pt = <b>4/3 px</b></span>
+                    <span>1pc = <b>12pt</b></span>
+                    <span>1q = <b>0.25mm</b></span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">02</span>
+                <h2>相对单位 —— em 与 rem</h2>
+                <span class="sec-en">FONT-RELATIVE</span>
+            </div>
+            <p class="sec-desc"><b>em</b> 相对「当前元素」的字号，嵌套时会<b>逐层复合</b>；<b>rem</b> 永远相对根元素 <span class="chip">&lt;html&gt;</span> 的字号，是全局统一的标尺。拖动滑块改变两列的基准字号，观察哪一列纹丝不动。</p>
+
+            <div class="demo-grid">
+                <div class="panel">
+                    <span class="fig">FIG. 02 / 复合</span>
+                    <div class="demo-col-head">
+                        <span class="tag em">em</span>
+                        <span class="note">每层 1.5em，越往里越大</span>
+                    </div>
+                    <div class="nest em-root">
+                        <div class="nest-label"><span>父 · 100%</span><span class="v" id="em-v0">16px</span></div>
+                        <div class="child em-l2">
+                            <div class="nest-label"><span>子 · 1.5em</span><span class="v" id="em-v1">24px</span></div>
+                            <div class="child em-l3">
+                                <div class="nest-label"><span>孙 · 1.5em</span><span class="v" id="em-v2">36px</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <span class="fig">FIG. 03 / 不复合</span>
+                    <div class="demo-col-head">
+                        <span class="tag rem">rem</span>
+                        <span class="note">每层 1.5rem，始终 = 24px</span>
+                    </div>
+                    <div class="nest rem-root">
+                        <div class="nest-label rem-label"><span>父 · 100%</span><span class="v" id="rem-v0">16px</span></div>
+                        <div class="child rem-l2">
+                            <div class="nest-label rem-label"><span>子 · 1.5rem</span><span class="v" id="rem-v1">24px</span></div>
+                            <div class="child rem-l3">
+                                <div class="nest-label rem-label"><span>孙 · 1.5rem</span><span class="v" id="rem-v2">24px</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-row">
+                <label for="base-slider">父元素基准字号 font-size</label>
+                <input type="range" id="base-slider" min="12" max="24" step="1" value="16">
+                <span class="slider-val" id="slider-val">16px</span>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">03</span>
+                <h2>相对单位 —— 视口单位</h2>
+                <span class="sec-en">VIEWPORT UNITS</span>
+            </div>
+            <p class="sec-desc"><b>vw / vh</b> 相对视口宽 / 高的 1%；<b>vmin / vmax</b> 取视口较小 / 较大边的 1%。窗口缩放时它们实时变化 —— 下面的读数由脚本实时刷新。</p>
+
+            <div class="panel">
+                <span class="fig">FIG. 04 / 随窗口缩放</span>
+                <div class="vp-stats" id="vp-stats">读取视口中…</div>
+                <div class="bar-row">
+                    <span class="code">width: 10vw</span>
+                    <div class="bar b1"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="code">width: 25vw</span>
+                    <div class="bar b2"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="code">width: 50vw</span>
+                    <div class="bar b3"></div>
+                </div>
+                <div class="vmin-stage">
+                    <div class="vmin-box">width: 34vmin<br>height: 34vmin</div>
+                    <p class="note" style="max-width:380px">用 <span class="chip">vmin</span> 可以轻松画出「永远不超出屏幕」的正方形：竖屏时它跟着宽度走，横屏时跟着高度走。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">04</span>
+                <h2>相对单位 —— 字符单位</h2>
+                <span class="sec-en">CHARACTER UNITS</span>
+            </div>
+            <p class="sec-desc"><b>ch</b> 是当前字体中字符「0」的宽度，常用来限制输入框宽度；<b>ex</b> 是小写字母「x」的高度，与字体的 x-height 挂钩。等宽字体下 20ch 恰好装下 20 个字符。</p>
+
+            <div class="panel">
+                <span class="fig">FIG. 05 / 字符宽度</span>
+                <div class="ch-box">00000000000000000000</div>
+                <p class="note mono" style="margin-top:10px">width: 20ch —— 刚好容纳 20 个「0」</p>
+
+                <div class="ex-row">
+                    <span class="code">height: 2ex · 18px</span>
+                    <div class="ex-box" style="font-size:18px">x</div>
+                </div>
+                <div class="ex-row">
+                    <span class="code">height: 2ex · 26px</span>
+                    <div class="ex-box" style="font-size:26px">x</div>
+                </div>
+                <div class="ex-row">
+                    <span class="code">height: 2ex · 34px</span>
+                    <div class="ex-box" style="font-size:34px">x</div>
+                </div>
+                <p class="note" style="margin-top:16px">同一个 2ex，随当前字号等比缩放 —— 想框住「一行小写字母」时很有用。</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">05</span>
+                <h2>速查表</h2>
+                <span class="sec-en">CHEAT SHEET</span>
+            </div>
+            <p class="sec-desc">每个单位「相对谁」，是使用时唯一需要记住的事。</p>
+
+            <div class="panel">
+                <span class="fig">TABLE / 单位 · 参照物</span>
+                <table class="unit-table">
+                    <thead>
+                        <tr><th>单位</th><th>名称</th><th>相对谁</th><th>备注</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>px</td><td>像素</td><td>—（绝对）</td><td>屏幕基本点，1in = 96px</td></tr>
+                        <tr><td>in</td><td>英寸</td><td>—（绝对）</td><td>= 96px = 2.54cm</td></tr>
+                        <tr><td>cm / mm</td><td>厘米 / 毫米</td><td>—（绝对）</td><td>1cm ≈ 37.8px</td></tr>
+                        <tr><td>pt</td><td>磅 point</td><td>—（绝对）</td><td>1in = 72pt，打印常用</td></tr>
+                        <tr><td>pc</td><td>派卡 pica</td><td>—（绝对）</td><td>1pc = 12pt = 16px</td></tr>
+                        <tr><td>q</td><td>四分之一毫米</td><td>—（绝对）</td><td>1q = 0.25mm，极少使用</td></tr>
+                        <tr><td>%</td><td>百分比</td><td class="who">父元素对应属性</td><td>宽度看父宽，行高看自身字号</td></tr>
+                        <tr><td>em</td><td>当前字号</td><td class="who">当前元素 font-size</td><td>嵌套会逐层复合</td></tr>
+                        <tr><td>rem</td><td>根字号</td><td class="who">&lt;html&gt; font-size</td><td>全局统一，不复合</td></tr>
+                        <tr><td>vw</td><td>视口宽</td><td class="who">视口宽度 1%</td><td>流体布局主力</td></tr>
+                        <tr><td>vh</td><td>视口高</td><td class="who">视口高度 1%</td><td>移动端受地址栏影响</td></tr>
+                        <tr><td>vmin / vmax</td><td>视口小边 / 大边</td><td class="who">视口边长 1%</td><td>正方形、不溢出屏幕</td></tr>
+                        <tr><td>ch</td><td>零宽</td><td class="who">当前字体「0」的宽度</td><td>限制输入框宽度</td></tr>
+                        <tr><td>ex</td><td>x 高</td><td class="who">当前字体「x」的高度</td><td>贴合小写字母行高</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-head">
+                <span class="sec-no">06</span>
+                <h2>实战提示</h2>
+                <span class="sec-en">FIELD NOTES</span>
+            </div>
+            <p class="sec-desc">几条写 CSS 时真正会用到的经验。</p>
+
+            <div class="tips">
+                <div class="tip">
+                    <span class="n">NOTE 01</span>
+                    <h3>字号用 rem，布局用 % 或 flex</h3>
+                    <p>rem 让用户浏览器字号缩放（无障碍）全局生效，同时不产生 em 的复合陷阱。</p>
+                </div>
+                <div class="tip">
+                    <span class="n">NOTE 02</span>
+                    <h3>流体排版：clamp + vw</h3>
+                    <p><code>font-size: clamp(1rem, 1.5vw, 1.5rem)</code> —— 随视口缩放，但永不越界，无需媒体查询。</p>
+                </div>
+                <div class="tip">
+                    <span class="n">NOTE 03</span>
+                    <h3>width: 100vw 的坑</h3>
+                    <p>100vw 包含滚动条宽度，竖向滚动条出现时可能产生横向溢出。布局宽度优先写 <code>100%</code>。</p>
+                </div>
+                <div class="tip">
+                    <span class="n">NOTE 04</span>
+                    <h3>更细的「发丝线」</h3>
+                    <p>高 DPI 屏幕上 1px 边框可能偏粗，可用 <code>transform: scaleY(0.5)</code> 画出视觉 0.5px 的线。</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <a href="index.html">← 返回作品索引</a>
+            <span>526 / 袁磊 · 11-1 长度单位</span>
+            <span>Built with native code</span>
+        </footer>
+    </div>
+
+    <script>
+        // 视口读数（vw / vh / vmin / vmax 的实际像素值）
+        var vp = document.getElementById('vp-stats');
+        function reportViewport() {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            var mn = Math.min(w, h) / 100;
+            var mx = Math.max(w, h) / 100;
+            vp.textContent =
+                '视口 = ' + w + ' × ' + h + ' px' +
+                ' ｜ 1vw = ' + (w / 100).toFixed(1) + 'px' +
+                ' ｜ 1vh = ' + (h / 100).toFixed(1) + 'px' +
+                ' ｜ 1vmin = ' + mn.toFixed(1) + 'px' +
+                ' ｜ 1vmax = ' + mx.toFixed(1) + 'px';
+        }
+        window.addEventListener('resize', reportViewport);
+        reportViewport();
+
+        // em / rem 对比演示：拖动滑块改变父元素基准字号
+        var slider = document.getElementById('base-slider');
+        var val = document.getElementById('slider-val');
+        var emRoot = document.querySelector('.em-root');
+        var remRoot = document.querySelector('.rem-root');
+
+        function fmt(n) {
+            return (Math.round(n * 10) / 10) + 'px';
+        }
+
+        function updateDemo() {
+            var base = parseFloat(slider.value);
+            val.textContent = fmt(base);
+
+            emRoot.style.fontSize = base + 'px';
+            remRoot.style.fontSize = base + 'px';
+
+            document.getElementById('em-v0').textContent = fmt(base);
+            document.getElementById('rem-v0').textContent = fmt(base);
+            document.getElementById('em-v1').textContent = fmt(base * 1.5);
+            document.getElementById('em-v2').textContent = fmt(base * 1.5 * 1.5);
+            // rem 列不随滑块变化（根元素保持 16px）
+            document.getElementById('rem-v1').textContent = fmt(16 * 1.5);
+            document.getElementById('rem-v2').textContent = fmt(16 * 1.5);
+        }
+
+        slider.addEventListener('input', updateDemo);
+        updateDemo();
+    </script>
+</body>
+</html>

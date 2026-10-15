@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-3-2 媒体查询背景变色</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== 全屏盒子 ===== */
+    .yuan-fullscreen-box {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-family: -apple-system, "Microsoft YaHei", sans-serif;
+      color: #fff;
+      text-align: center;
+      /* 默认（小屏）：红 */
+      background-color: #ff6b6b;
+      transition: background-color 0.6s ease;
+    }
+
+    .yuan-fullscreen-box h1 {
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .yuan-fullscreen-box p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    /* 当前断点标签：默认全部隐藏，由媒体查询控制显示 */
+    .yuan-tag {
+      display: none;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    /* ===== 媒体查询：随 viewport 宽度变化背景色 ===== */
+
+    /* 中屏 601px ~ 900px：青 */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .yuan-fullscreen-box { background-color: #4ecdc4; }
+      .yuan-tag--md { display: inline-block; }
+    }
+
+    /* 大屏 901px ~ 1200px：黄 */
+    @media (min-width: 901px) and (max-width: 1200px) {
+      .yuan-fullscreen-box { background-color: #ffe66d; color: #333; }
+      .yuan-tag--lg { display: inline-block; }
+    }
+
+    /* 超大屏 ≥1201px：紫 */
+    @media (min-width: 1201px) {
+      .yuan-fullscreen-box {
+        background-color: #6a4cff;
+        box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.25);
+      }
+      .yuan-tag--xl { display: inline-block; }
+    }
+
+    /* 小屏 ≤600px：红（默认色） */
+    @media (max-width: 600px) {
+      .yuan-tag--sm { display: inline-block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="yuan-fullscreen-box">
+    <h1>袁磊</h1>
+    <p>拖动浏览器窗口宽度，背景颜色随 viewport 变化</p>
+    <span class="yuan-tag yuan-tag--sm">小屏 ≤ 600px · 红</span>
+    <span class="yuan-tag yuan-tag--md">中屏 601 ~ 900px · 青</span>
+    <span class="yuan-tag yuan-tag--lg">大屏 901 ~ 1200px · 黄</span>
+    <span class="yuan-tag yuan-tag--xl">超大屏 ≥ 1201px · 紫</span>
+  </div>
+</body>
+</html>

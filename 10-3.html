@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-3 响应式背景色</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: clamp(14px, 1vw, 18px);
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      background: #6c63ff;
+      color: #fff;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      transition: background-color 0.5s ease;
+    }
+
+    .viewport-box {
+      width: min(760px, 100%);
+      padding: clamp(36px, 8vw, 80px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 25px 80px rgba(30, 20, 85, 0.22);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .viewport-box h1 {
+      margin: 0 0 14px;
+      font-size: 4rem;
+      line-height: 1;
+      letter-spacing: 0.05em;
+    }
+
+    .viewport-box p {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      opacity: 0.88;
+    }
+
+    .viewport-box .status {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 0.5rem 0.875rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      html {
+        font-size: clamp(14px, 1.5vw, 17px);
+      }
+
+      body {
+        background: #0ea5e9;
+      }
+
+      .viewport-box {
+        width: min(620px, 100%);
+      }
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: clamp(13px, 2vw, 16px);
+      }
+
+      body {
+        background: #f97316;
+      }
+
+      .viewport-box {
+        padding: 42px 24px;
+        border-radius: 22px;
+      }
+
+      .viewport-box h1 {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      html {
+        font-size: 13px;
+      }
+
+      body {
+        background: #10b981;
+      }
+
+      .viewport-box {
+        padding: 34px 18px;
+      }
+
+      .viewport-box h1 {
+        font-size: 2.5rem;
+      }
+
+      .viewport-box p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="viewport-box">
+    <h1>袁磊</h1>
+    <p>根据视口大小变化，页面背景色也会自动切换</p>
+    <span class="status">响应式设计</span>
+  </main>
+</body>
+</html>

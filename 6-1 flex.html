@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       *{
+           margin: 0;
+           padding: 0;
+       }
+       .flex{
+           display: flex;
+           /* 容器，它的子元素在一行显示 */
+           flex-wrap: wrap;
+           justify-content: space-around;
+        }
+       .flex li{
+        /* 项目，容器的子元素 */
+        width:20%;
+        height:200px;
+        border:1px solid #333;
+        /* float:left; */
+        list-style: none;
+        display: flex;
+       }
+       .box{
+        width:70px;
+        height:70px;
+        background-color: #f2f3f4;
+       }
+       .flex li:nth-child(1){
+           /* 水平垂直对齐 */
+           align-items: center;
+           justify-content: center;
+       }
+       .flex li:nth-child(4)  .box:nth-child(1){
+           width:100%;
+       }
+    </style>
+</head>
+<body>
+    <h2>袁磊的flex</h2>
+    <ul class="flex">
+        <li>
+            <div class="box"></div>
+        </li>
+        <li></li>
+        <li></li>
+        <li></li>         
+    </ul>
+</body>
+</html>
