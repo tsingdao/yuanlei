@@ -19,7 +19,7 @@ All page content is in Chinese.
 - **Do not rename or "fix" existing files.** Links in `index.html` encode exact names, including the typo in `9-1 transiton.html` and the double space in `5-1  层叠与继承.html`. Renaming breaks links unless you update every reference.
 - **`index.html` card list is hand-maintained.** It currently omits the `10-1`–`10-4` animation exercise pages. When you add a new page, add a matching `<a class="work-card" href="...">` card to `index.html`; nothing auto-generates it.
 - **`index.html` must keep the `THE BRIEF` blockquote** in its `prompt-box` section — its own generation prompt requires the page to quote it verbatim ("页面中包括本提示词").
-- **`index.html` must stay native code with no CDN** (per that same prompt). Other exercise pages are free to differ — e.g. `1.html` loads Google Fonts — so don't "fix" them toward a single convention.
+- **`index.html` must stay native code with no CDN** (per that same prompt). Legacy pages may differ — e.g. `1.html` loads Google Fonts — leave them as-is, but all new pages must follow the Coding Rules below (native only, no third-party libs or CDN).
 
 ## Conventions
 
@@ -27,9 +27,17 @@ All page content is in Chinese.
 - Lesson-numbered filenames follow `N-M 中文名.html`; pick a name consistent with the existing sequence and URL-encode it when linking.
 - Older exercise pages have placeholder `<title>Document</title>` and `lang="en"` — leave them as-is unless the task is to clean them up.
 
+## Coding Rules
+
+- **Author comment required.** Every HTML page must include a comment near the top of `<body>` (or inside `<head>`) in this format: `<!-- 姓名：袁磊，日期：yyyy-mm-dd，功能名称：<该页功能> -->`. Fill in the date and the page's function name; 姓名：袁磊 stays fixed.
+- **Native implementation only.** Use plain HTML, CSS, and JavaScript — no frameworks, no third-party libraries, no CDN links of any kind.
+- **Icons from local iconfont only.** Icons must come from the `font/` directory (iconfont font icons / `iconfont.js` SVG symbols). Never use icon libraries from npm or CDN.
+- **Data fetching via `fetch`.** When a page needs server-side data, use the native `fetch` API (no axios/jQuery or other wrappers).
+
 ## Naming Conventions
 
-- All CSS class names, ID names, and JavaScript variables must start with `yuan_`.
+- All variable names, CSS class names, and ID names must start with `yl_`.
+- Existing pages use the older `yuan_` prefix — do not rename them; the `yl_` rule applies to all new code.
 
 ## Prompt Logging
 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-2 JavaScript六种基础数据类型</title>
+    <!-- 姓名：袁磊，日期：2026-10-22，功能名称：JavaScript六种基础数据类型演示 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #f4f6fa;
+            color: #2b2f36;
+            min-height: 100vh;
+            padding: 40px 16px;
+        }
+
+        .yl_wrap {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .yl_header {
+            background: #1f2a44;
+            color: #fff;
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+        }
+
+        .yl_header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .yl_header p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #b8c2da;
+        }
+
+        .yl_types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .yl_card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 22px;
+            border: 1px solid #e3e8f0;
+            box-shadow: 0 2px 8px rgba(31, 42, 68, 0.06);
+        }
+
+        .yl_card h2 {
+            font-size: 17px;
+            color: #1f2a44;
+            margin-bottom: 6px;
+        }
+
+        .yl_card .yl_code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+            background: #f0f3f9;
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .yl_card .yl_result {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+            color: #b3541e;
+        }
+
+        .yl_card .yl_desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #5b6472;
+        }
+
+        .yl_table_box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 22px 24px;
+            border: 1px solid #e3e8f0;
+        }
+
+        .yl_table_box h2 {
+            font-size: 18px;
+            color: #1f2a44;
+            margin-bottom: 14px;
+        }
+
+        .yl_table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .yl_table th,
+        .yl_table td {
+            border: 1px solid #dfe5ee;
+            padding: 9px 12px;
+            text-align: left;
+        }
+
+        .yl_table th {
+            background: #1f2a44;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .yl_table tr:nth-child(even) td {
+            background: #f7f9fc;
+        }
+
+        .yl_table td.yl_mono {
+            font-family: Consolas, "Courier New", monospace;
+            color: #b3541e;
+        }
+
+        .yl_tip {
+            margin-top: 14px;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #5b6472;
+            background: #fff8ec;
+            border-left: 4px solid #e8a33d;
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="yl_wrap">
+        <header class="yl_header">
+            <h1>JavaScript 六种基础数据类型</h1>
+            <p>Number（数值）、String（字符串）、Boolean（布尔值）、Undefined（未定义）、Null（空值）、Object（对象）。
+               使用 typeof 运算符可以检测数据类型，本页面的表格结果由 JavaScript 实时计算生成。</p>
+        </header>
+
+        <div class="yl_types" id="yl_cards"></div>
+
+        <div class="yl_table_box">
+            <h2>typeof 检测结果一览</h2>
+            <table class="yl_table">
+                <thead>
+                    <tr>
+                        <th>数据类型</th>
+                        <th>示例值</th>
+                        <th>typeof 结果</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody id="yl_tbody"></tbody>
+            </table>
+            <p class="yl_tip">注意：typeof null 的结果是 "object"，这是 JavaScript 早期的历史遗留缺陷（null 本身是空值类型），判断 null 应使用 === 直接比较。</p>
+        </div>
+    </div>
+
+    <script>
+        // 定义六种基础数据类型的示例变量（变量名均以 yl_ 开头）
+        var yl_num = 2026;                    // Number 数值型
+        var yl_str = "高级网页设计";          // String 字符串型
+        var yl_bool = true;                   // Boolean 布尔型
+        var yl_undef;                         // Undefined 已声明未赋值
+        var yl_null = null;                   // Null 空值
+        var yl_obj = { name: "袁磊", lesson: "14-2" }; // Object 对象
+
+        // 卡片与表格的数据描述
+        var yl_demo = [
+            { type: "Number",    varName: "yl_num",   sample: "2026",                          desc: "整数或浮点数，如 2026、3.14" },
+            { type: "String",    varName: "yl_str",   sample: '"高级网页设计"',                desc: "由零个或多个字符组成的文本，用引号包裹" },
+            { type: "Boolean",   varName: "yl_bool",  sample: "true",                          desc: "只有 true 和 false 两个值" },
+            { type: "Undefined", varName: "yl_undef", sample: "undefined",                     desc: "变量声明后未赋值时的默认值" },
+            { type: "Null",      varName: "yl_null",  sample: "null",                          desc: "表示\"空\"，可以主动赋值清空变量" },
+            { type: "Object",    varName: "yl_obj",   sample: '{ name: "袁磊", lesson: "14-2" }', desc: "键值对集合，属引用类型" }
+        ];
+
+        var yl_values = {
+            yl_num: yl_num,
+            yl_str: yl_str,
+            yl_bool: yl_bool,
+            yl_undef: yl_undef,
+            yl_null: yl_null,
+            yl_obj: yl_obj
+        };
+
+        // 渲染六张类型卡片
+        var yl_cardsBox = document.getElementById("yl_cards");
+        var yl_cardHtml = "";
+        for (var yl_i = 0; yl_i < yl_demo.length; yl_i++) {
+            var yl_item = yl_demo[yl_i];
+            var yl_realValue = yl_values[yl_item.varName];
+            yl_cardHtml += '<div class="yl_card">'
+                + '<h2>' + yl_item.type + '</h2>'
+                + '<div class="yl_code">var ' + yl_item.varName + ' = ' + yl_item.sample + ';</div>'
+                + '<p class="yl_result">typeof 结果：' + typeof yl_realValue + '</p>'
+                + '<p class="yl_desc">' + yl_item.desc + '</p>'
+                + '</div>';
+        }
+        yl_cardsBox.innerHTML = yl_cardHtml;
+
+        // 渲染 typeof 检测结果表格
+        var yl_tbody = document.getElementById("yl_tbody");
+        var yl_rowsHtml = "";
+        for (var yl_j = 0; yl_j < yl_demo.length; yl_j++) {
+            var yl_row = yl_demo[yl_j];
+            var yl_val = yl_values[yl_row.varName];
+            yl_rowsHtml += '<tr>'
+                + '<td>' + yl_row.type + '</td>'
+                + '<td class="yl_mono">' + yl_row.sample + '</td>'
+                + '<td class="yl_mono">typeof ' + yl_row.varName + ' → "' + typeof yl_val + '"</td>'
+                + '<td>' + yl_row.desc + '</td>'
+                + '</tr>';
+        }
+        yl_tbody.innerHTML = yl_rowsHtml;
+    </script>
+</body>
+</html>
