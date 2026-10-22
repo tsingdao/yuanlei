@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-2 Lucide SVG 图标</title>
+    <script src="cdn/lucide.js"></script>
+    <style>
+        :root {
+            --yuan_primary: #2c3e50;
+            --yuan_accent: #e74c3c;
+            --yuan_bg: #ecf0f1;
+            --yuan_card: #ffffff;
+            --yuan_text: #34495e;
+            --yuan_muted: #7f8c8d;
+            --yuan_radius: 12px;
+            --yuan_shadow: 0 4px 24px rgba(44, 62, 80, .12);
+            --yuan_spacing: 24px;
+            --yuan_transition: .3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--yuan_bg);
+            color: var(--yuan_text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ========== 导航栏 ========== */
+        .yuan_nav {
+            background: var(--yuan_primary);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .yuan_logo {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .yuan_logo span {
+            color: var(--yuan_accent);
+        }
+
+        .yuan_nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .yuan_nav-links a {
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--yuan_transition);
+        }
+
+        .yuan_nav-links a:hover {
+            color: #fff;
+        }
+
+        /* ========== Hero 区域 ========== */
+        .yuan_hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: linear-gradient(135deg, var(--yuan_primary) 0%, #34495e 100%);
+            color: #fff;
+        }
+
+        .yuan_hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 16px;
+            letter-spacing: -.02em;
+        }
+
+        .yuan_hero p {
+            font-size: 18px;
+            opacity: .85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .yuan_hero .yuan_highlight {
+            color: var(--yuan_accent);
+            font-weight: 700;
+        }
+
+        /* ========== 内容区域 ========== */
+        .yuan_container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .yuan_section-title {
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: var(--yuan_primary);
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .yuan_section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 2px;
+            background: var(--yuan_accent);
+        }
+
+        /* ========== 图标网格 ========== */
+        .yuan_icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .yuan_icon-card {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--yuan_shadow);
+            transition: var(--yuan_transition);
+            border: 1px solid rgba(44,62,80,.08);
+        }
+
+        .yuan_icon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(44,62,80,.18);
+        }
+
+        .yuan_icon-card svg {
+            width: 36px;
+            height: 36px;
+            color: var(--yuan_primary);
+            margin-bottom: 12px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .yuan_icon-card span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+            display: block;
+        }
+
+        /* ========== 尺寸演示 ========== */
+        .yuan_size-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_size-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_size-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_size-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_size-item {
+            text-align: center;
+        }
+
+        .yuan_size-item svg {
+            display: block;
+            color: var(--yuan_accent);
+            margin-bottom: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .yuan_size-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 颜色演示 ========== */
+        .yuan_color-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_color-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_color-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_color-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_color-item {
+            text-align: center;
+        }
+
+        .yuan_color-item svg {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .yuan_color-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 描边演示 ========== */
+        .yuan_stroke-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_stroke-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_stroke-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_stroke-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_stroke-item {
+            text-align: center;
+        }
+
+        .yuan_stroke-item svg {
+            display: block;
+            width: 40px;
+            height: 40px;
+            color: var(--yuan_primary);
+            margin-bottom: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .yuan_stroke-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 代码说明区域 ========== */
+        .yuan_code-section {
+            background: var(--yuan_primary);
+            border-radius: var(--yuan_radius);
+            padding: 36px;
+            color: #fff;
+        }
+
+        .yuan_code-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--yuan_accent);
+        }
+
+        .yuan_code-section pre {
+            background: rgba(0,0,0,.3);
+            padding: 24px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Cascadia Code", "Consolas", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .yuan_code-section .yuan_comment { color: #7f8c8d; }
+        .yuan_code-section .yuan_tag { color: #3498db; }
+        .yuan_code-section .yuan_attr { color: #e67e22; }
+        .yuan_code-section .yuan_value { color: #27ae60; }
+
+        /* ========== 页脚 ========== */
+        .yuan_footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: var(--yuan_muted);
+            font-size: 14px;
+            border-top: 1px solid rgba(44,62,80,.1);
+        }
+
+        .yuan_footer strong {
+            color: var(--yuan_primary);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .yuan_nav { padding: 14px 20px; }
+            .yuan_nav-links { display: none; }
+            .yuan_hero { padding: 50px 20px 40px; }
+            .yuan_container { padding: 40px 16px 60px; }
+            .yuan_icon-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            .yuan_size-demo, .yuan_color-demo, .yuan_stroke-demo { padding: 24px; }
+            .yuan_code-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="yuan_nav">
+        <a class="yuan_logo" href="index.html">袁磊<span>·</span>Lucide SVG</a>
+        <ul class="yuan_nav-links">
+            <li><a href="#yuan_icons">图标库</a></li>
+            <li><a href="#yuan_code">代码</a></li>
+            <li><a href="index.html">返回首页</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="yuan_hero">
+        <h1>Lucide <span class="yuan_highlight">SVG 图标</span></h1>
+        <p>用 <strong>袁磊</strong> 的方式学习 Lucide — 通过 data-lucide 属性生成内联 SVG 图标，轻量且可定制。</p>
+    </header>
+
+    <main class="yuan_container">
+
+        <!-- 图标网格 -->
+        <h2 class="yuan_section-title" id="yuan_icons">常用图标</h2>
+        <div class="yuan_icon-grid">
+            <div class="yuan_icon-card"><i data-lucide="home"></i><span>home</span></div>
+            <div class="yuan_icon-card"><i data-lucide="user"></i><span>user</span></div>
+            <div class="yuan_icon-card"><i data-lucide="heart"></i><span>heart</span></div>
+            <div class="yuan_icon-card"><i data-lucide="star"></i><span>star</span></div>
+            <div class="yuan_icon-card"><i data-lucide="search"></i><span>search</span></div>
+            <div class="yuan_icon-card"><i data-lucide="settings"></i><span>settings</span></div>
+            <div class="yuan_icon-card"><i data-lucide="mail"></i><span>mail</span></div>
+            <div class="yuan_icon-card"><i data-lucide="camera"></i><span>camera</span></div>
+            <div class="yuan_icon-card"><i data-lucide="music"></i><span>music</span></div>
+            <div class="yuan_icon-card"><i data-lucide="video"></i><span>video</span></div>
+            <div class="yuan_icon-card"><i data-lucide="file"></i><span>file</span></div>
+            <div class="yuan_icon-card"><i data-lucide="folder"></i><span>folder</span></div>
+            <div class="yuan_icon-card"><i data-lucide="cloud"></i><span>cloud</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bell"></i><span>bell</span></div>
+            <div class="yuan_icon-card"><i data-lucide="calendar"></i><span>calendar</span></div>
+            <div class="yuan_icon-card"><i data-lucide="map-pin"></i><span>map-pin</span></div>
+            <div class="yuan_icon-card"><i data-lucide="phone"></i><span>phone</span></div>
+            <div class="yuan_icon-card"><i data-lucide="shopping-cart"></i><span>shopping-cart</span></div>
+            <div class="yuan_icon-card"><i data-lucide="credit-card"></i><span>credit-card</span></div>
+            <div class="yuan_icon-card"><i data-lucide="lock"></i><span>lock</span></div>
+            <div class="yuan_icon-card"><i data-lucide="unlock"></i><span>unlock</span></div>
+            <div class="yuan_icon-card"><i data-lucide="trash-2"></i><span>trash-2</span></div>
+            <div class="yuan_icon-card"><i data-lucide="edit"></i><span>edit</span></div>
+            <div class="yuan_icon-card"><i data-lucide="share"></i><span>share</span></div>
+            <div class="yuan_icon-card"><i data-lucide="download"></i><span>download</span></div>
+            <div class="yuan_icon-card"><i data-lucide="upload"></i><span>upload</span></div>
+            <div class="yuan_icon-card"><i data-lucide="link"></i><span>link</span></div>
+            <div class="yuan_icon-card"><i data-lucide="image"></i><span>image</span></div>
+            <div class="yuan_icon-card"><i data-lucide="gamepad-2"></i><span>gamepad-2</span></div>
+            <div class="yuan_icon-card"><i data-lucide="car"></i><span>car</span></div>
+            <div class="yuan_icon-card"><i data-lucide="plane"></i><span>plane</span></div>
+            <div class="yuan_icon-card"><i data-lucide="utensils"></i><span>utensils</span></div>
+            <div class="yuan_icon-card"><i data-lucide="coffee"></i><span>coffee</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bike"></i><span>bike</span></div>
+            <div class="yuan_icon-card"><i data-lucide="book"></i><span>book</span></div>
+            <div class="yuan_icon-card"><i data-lucide="graduation-cap"></i><span>graduation-cap</span></div>
+            <div class="yuan_icon-card"><i data-lucide="code"></i><span>code</span></div>
+            <div class="yuan_icon-card"><i data-lucide="terminal"></i><span>terminal</span></div>
+            <div class="yuan_icon-card"><i data-lucide="database"></i><span>database</span></div>
+            <div class="yuan_icon-card"><i data-lucide="server"></i><span>server</span></div>
+            <div class="yuan_icon-card"><i data-lucide="wifi"></i><span>wifi</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bluetooth"></i><span>bluetooth</span></div>
+            <div class="yuan_icon-card"><i data-lucide="battery-full"></i><span>battery-full</span></div>
+            <div class="yuan_icon-card"><i data-lucide="sun"></i><span>sun</span></div>
+            <div class="yuan_icon-card"><i data-lucide="moon"></i><span>moon</span></div>
+            <div class="yuan_icon-card"><i data-lucide="tree"></i><span>tree</span></div>
+            <div class="yuan_icon-card"><i data-lucide="flame"></i><span>flame</span></div>
+            <div class="yuan_icon-card"><i data-lucide="droplet"></i><span>droplet</span></div>
+            <div class="yuan_icon-card"><i data-lucide="paw"></i><span>paw</span></div>
+            <div class="yuan_icon-card"><i data-lucide="globe"></i><span>globe</span></div>
+            <div class="yuan_icon-card"><i data-lucide="flag"></i><span>flag</span></div>
+            <div class="yuan_icon-card"><i data-lucide="trophy"></i><span>trophy</span></div>
+            <div class="yuan_icon-card"><i data-lucide="gift"></i><span>gift</span></div>
+            <div class="yuan_icon-card"><i data-lucide="wine"></i><span>wine</span></div>
+            <div class="yuan_icon-card"><i data-lucide="rocket"></i><span>rocket</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ghost"></i><span>ghost</span></div>
+            <div class="yuan_icon-card"><i data-lucide="skull"></i><span>skull</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bug"></i><span>bug</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bot"></i><span>bot</span></div>
+            <div class="yuan_icon-card"><i data-lucide="wand"></i><span>wand</span></div>
+            <div class="yuan_icon-card"><i data-lucide="sparkles"></i><span>sparkles</span></div>
+            <div class="yuan_icon-card"><i data-lucide="dice"></i><span>dice</span></div>
+            <div class="yuan_icon-card"><i data-lucide="puzzle"></i><span>puzzle</span></div>
+            <div class="yuan_icon-card"><i data-lucide="trophy"></i><span>trophy</span></div>
+            <div class="yuan_icon-card"><i data-lucide="medal"></i><span>medal</span></div>
+            <div class="yuan_icon-card"><i data-lucide="crown"></i><span>crown</span></div>
+            <div class="yuan_icon-card"><i data-lucide="gem"></i><span>gem</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ring"></i><span>ring</span></div>
+            <div class="yuan_icon-card"><i data-lucide="watch"></i><span>watch</span></div>
+            <div class="yuan_icon-card"><i data-lucide="glasses"></i><span>glasses</span></div>
+            <div class="yuan_icon-card"><i data-lucide="shirt"></i><span>shirt</span></div>
+            <div class="yuan_icon-card"><i data-lucide="footprints"></i><span>footprints</span></div>
+            <div class="yuan_icon-card"><i data-lucide="anchor"></i><span>anchor</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ship"></i><span>ship</span></div>
+            <div class="yuan_icon-card"><i data-lucide="train"></i><span>train</span></div>
+            <div class="yuan_icon-card"><i data-lucide="truck"></i><span>truck</span></div>
+            <div class="yuan_icon-card"><i data-lucide="fuel"></i><span>fuel</span></div>
+            <div class="yuan_icon-card"><i data-lucide="traffic-cone"></i><span>traffic-cone</span></div>
+            <div class="yuan_icon-card"><i data-lucide="construction"></i><span>construction</span></div>
+            <div class="yuan_icon-card"><i data-lucide="hammer"></i><span>hammer</span></div>
+            <div class="yuan_icon-card"><i data-lucide="wrench"></i><span>wrench</span></div>
+            <div class="yuan_icon-card"><i data-lucide="screwdriver"></i><span>screwdriver</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ruler"></i><span>ruler</span></div>
+            <div class="yuan_icon-card"><i data-lucide="scissors"></i><span>scissors</span></div>
+            <div class="yuan_icon-card"><i data-lucide="paperclip"></i><span>paperclip</span></div>
+            <div class="yuan_icon-card"><i data-lucide="pin"></i><span>pin</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bookmark"></i><span>bookmark</span></div>
+            <div class="yuan_icon-card"><i data-lucide="tag"></i><span>tag</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ticket"></i><span>ticket</span></div>
+            <div class="yuan_icon-card"><i data-lucide="qr-code"></i><span>qr-code</span></div>
+            <div class="yuan_icon-card"><i data-lucide="barcode"></i><span>barcode</span></div>
+            <div class="yuan_icon-card"><i data-lucide="scan"></i><span>scan</span></div>
+            <div class="yuan_icon-card"><i data-lucide="fingerprint"></i><span>fingerprint</span></div>
+            <div class="yuan_icon-card"><i data-lucide="key"></i><span>key</span></div>
+            <div class="yuan_icon-card"><i data-lucide="shield"></i><span>shield</span></div>
+            <div class="yuan_icon-card"><i data-lucide="shield-check"></i><span>shield-check</span></div>
+            <div class="yuan_icon-card"><i data-lucide="sword"></i><span>sword</span></div>
+            <div class="yuan_icon-card"><i data-lucide="axe"></i><span>axe</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bow-arrow"></i><span>bow-arrow</span></div>
+            <div class="yuan_icon-card"><i data-lucide="target"></i><span>target</span></div>
+            <div class="yuan_icon-card"><i data-lucide="crosshair"></i><span>crosshair</span></div>
+            <div class="yuan_icon-card"><i data-lucide="binoculars"></i><span>binoculars</span></div>
+            <div class="yuan_icon-card"><i data-lucide="telescope"></i><span>telescope</span></div>
+            <div class="yuan_icon-card"><i data-lucide="microscope"></i><span>microscope</span></div>
+            <div class="yuan_icon-card"><i data-lucide="flask"></i><span>flask</span></div>
+            <div class="yuan_icon-card"><i data-lucide="test-tube"></i><span>test-tube</span></div>
+            <div class="yuan_icon-card"><i data-lucide="atom"></i><span>atom</span></div>
+            <div class="yuan_icon-card"><i data-lucide="dna"></i><span>dna</span></div>
+            <div class="yuan_icon-card"><i data-lucide="brain"></i><span>brain</span></div>
+            <div class="yuan_icon-card"><i data-lucide="heart-pulse"></i><span>heart-pulse</span></div>
+            <div class="yuan_icon-card"><i data-lucide="stethoscope"></i><span>stethoscope</span></div>
+            <div class="yuan_icon-card"><i data-lucide="syringe"></i><span>syringe</span></div>
+            <div class="yuan_icon-card"><i data-lucide="pill"></i><span>pill</span></div>
+            <div class="yuan_icon-card"><i data-lucide="thermometer"></i><span>thermometer</span></div>
+            <div class="yuan_icon-card"><i data-lucide="bandage"></i><span>bandage</span></div>
+            <div class="yuan_icon-card"><i data-lucide="wheelchair"></i><span>wheelchair</span></div>
+            <div class="yuan_icon-card"><i data-lucide="accessibility"></i><span>accessibility</span></div>
+            <div class="yuan_icon-card"><i data-lucide="ear"></i><span>ear</span></div>
+            <div class="yuan_icon-card"><i data-lucide="eye"></i><span>eye</span></div>
+            <div class="yuan_icon-card"><i data-lucide="eye-off"></i><span>eye-off</span></div>
+            <div class="yuan_icon-card"><i data-lucide="hand"></i><span>hand</span></div>
+            <div class="yuan_icon-card"><i data-lucide="thumbs-up"></i><span>thumbs-up</span></div>
+            <div class="yuan_icon-card"><i data-lucide="thumbs-down"></i><span>thumbs-down</span></div>
+            <div class="yuan_icon-card"><i data-lucide="peace"></i><span>peace</span></div>
+            <div class="yuan_icon-card"><i data-lucide="frown"></i><span>frown</span></div>
+            <div class="yuan_icon-card"><i data-lucide="smile"></i><span>smile</span></div>
+            <div class="yuan_icon-card"><i data-lucide="meh"></i><span>meh</span></div>
+            <div class="yuan_icon-card"><i data-lucide="laugh"></i><span>laugh</span></div>
+            <div class="yuan_icon-card"><i data-lucide="angry"></i><span>angry</span></div>
+            <div class="yuan_icon-card"><i data-lucide="annoyed"></i><span>annoyed</span></div>
+        </div>
+
+        <!-- 尺寸演示 -->
+        <div class="yuan_size-demo">
+            <h3>图标尺寸</h3>
+            <p>通过 width 和 height 属性控制 SVG 图标大小</p>
+            <div class="yuan_size-row">
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="16" height="16" style="color: #e74c3c;"></i>
+                    <span>16px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="24" height="24" style="color: #e74c3c;"></i>
+                    <span>24px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="32" height="32" style="color: #e74c3c;"></i>
+                    <span>32px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="48" height="48" style="color: #e74c3c;"></i>
+                    <span>48px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="64" height="64" style="color: #e74c3c;"></i>
+                    <span>64px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i data-lucide="star" width="96" height="96" style="color: #e74c3c;"></i>
+                    <span>96px</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 颜色演示 -->
+        <div class="yuan_color-demo">
+            <h3>图标颜色</h3>
+            <p>通过 color 属性控制 SVG 图标颜色</p>
+            <div class="yuan_color-row">
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #e74c3c;"></i>
+                    <span>红色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #e67e22;"></i>
+                    <span>橙色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #f1c40f;"></i>
+                    <span>黄色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #27ae60;"></i>
+                    <span>绿色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #3498db;"></i>
+                    <span>蓝色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #9b59b6;"></i>
+                    <span>紫色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #1abc9c;"></i>
+                    <span>青色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i data-lucide="heart" style="color: #34495e;"></i>
+                    <span>深蓝</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 描边演示 -->
+        <div class="yuan_stroke-demo">
+            <h3>描边宽度</h3>
+            <p>通过 stroke-width 属性控制 SVG 图标描边粗细</p>
+            <div class="yuan_stroke-row">
+                <div class="yuan_stroke-item">
+                    <i data-lucide="star" stroke-width="1"></i>
+                    <span>1px</span>
+                </div>
+                <div class="yuan_stroke-item">
+                    <i data-lucide="star" stroke-width="1.5"></i>
+                    <span>1.5px</span>
+                </div>
+                <div class="yuan_stroke-item">
+                    <i data-lucide="star" stroke-width="2"></i>
+                    <span>2px</span>
+                </div>
+                <div class="yuan_stroke-item">
+                    <i data-lucide="star" stroke-width="2.5"></i>
+                    <span>2.5px</span>
+                </div>
+                <div class="yuan_stroke-item">
+                    <i data-lucide="star" stroke-width="3"></i>
+                    <span>3px</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 代码说明 -->
+        <div class="yuan_code-section" id="yuan_code">
+            <h3>核心代码</h3>
+            <pre><span class="yuan_comment">&lt;!-- 引入 Lucide JS --&gt;</span>
+<span class="yuan_tag">&lt;script</span> <span class="yuan_attr">src</span>=<span class="yuan-value">"cdn/lucide.js"</span><span class="yuan_tag">&gt;&lt;/script&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 使用 data-lucide 属性 --&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">data-lucide</span>=<span class="yuan-value">"home"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">data-lucide</span>=<span class="yuan-value">"heart"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">data-lucide</span>=<span class="yuan-value">"star"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 自定义尺寸和颜色 --&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">data-lucide</span>=<span class="yuan-value">"star"</span> <span class="yuan_attr">width</span>=<span class="yuan-value">"48"</span> <span class="yuan_attr">height</span>=<span class="yuan-value">"48"</span> <span class="yuan_attr">style</span>=<span class="yuan-value">"color: #e74c3c;"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 自定义描边宽度 --&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">data-lucide</span>=<span class="yuan-value">"star"</span> <span class="yuan_attr">stroke-width</span>=<span class="yuan-value">"3"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 初始化图标 --&gt;</span>
+<span class="yuan_tag">&lt;script&gt;</span>
+    lucide.createIcons();
+<span class="yuan_tag">&lt;/script&gt;</span></pre>
+        </div>
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="yuan_footer">
+        <p><strong>袁磊</strong> · 526 · 《高级网页设计》课堂实践 · 第 13 讲 Lucide SVG 图标</p>
+    </footer>
+
+    <!-- 初始化 Lucide 图标 -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

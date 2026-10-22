@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>13-4 iconfont SVG 图标导航</title>
+    <script src="font/iconfont.js"></script>
+    <style>
+        :root {
+            --yuan_primary: #2c3e50;
+            --yuan_accent: #e74c3c;
+            --yuan_bg: #f5f5f5;
+            --yuan_card: #ffffff;
+            --yuan_text: #333333;
+            --yuan_muted: #999999;
+            --yuan_border: #e0e0e0;
+            --yuan_nav-height: 60px;
+            --yuan_transition: .3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--yuan_bg);
+            color: var(--yuan_text);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-bottom: calc(var(--yuan_nav-height) + env(safe-area-inset-bottom));
+        }
+
+        /* ========== 导航栏 ========== */
+        .yuan_nav {
+            background: var(--yuan_primary);
+            padding: 16px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .yuan_nav-title {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* ========== 内容区域 ========== */
+        .yuan_container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .yuan_page-header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+
+        .yuan_page-header h1 {
+            font-size: 24px;
+            color: var(--yuan_primary);
+            margin-bottom: 8px;
+        }
+
+        .yuan_page-header p {
+            font-size: 14px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 功能卡片 ========== */
+        .yuan_card {
+            background: var(--yuan_card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+        }
+
+        .yuan_card h3 {
+            font-size: 16px;
+            color: var(--yuan_primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .yuan_card p {
+            font-size: 14px;
+            color: var(--yuan_muted);
+            line-height: 1.6;
+        }
+
+        .yuan_icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .yuan_icon-item {
+            text-align: center;
+            padding: 12px 8px;
+            background: var(--yuan_bg);
+            border-radius: 8px;
+        }
+
+        .yuan_icon-item .yuan_svg-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--yuan_primary);
+        }
+
+        .yuan_icon-item span {
+            display: block;
+            font-size: 11px;
+            color: var(--yuan_muted);
+            margin-top: 4px;
+        }
+
+        /* ========== 底部导航栏 ========== */
+        .yuan_tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: calc(var(--yuan_nav-height) + env(safe-area-inset-bottom));
+            padding-bottom: env(safe-area-inset-bottom);
+            background: var(--yuan_card);
+            border-top: 1px solid var(--yuan_border);
+            display: flex;
+            z-index: 1000;
+            box-shadow: 0 -2px 20px rgba(0,0,0,.08);
+        }
+
+        .yuan_tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--yuan_muted);
+            transition: color var(--yuan_transition);
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .yuan_tab-item:active {
+            opacity: .7;
+        }
+
+        .yuan_tab-item.yuan_active {
+            color: var(--yuan_accent);
+        }
+
+        .yuan_tab-icon {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        .yuan_tab-icon .yuan_svg-icon {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        /* 数字徽章 */
+        .yuan_tab-badge {
+            position: absolute;
+            top: -6px;
+            right: -14px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: var(--yuan_accent);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        /* 红点 */
+        .yuan_tab-dot {
+            position: absolute;
+            top: -2px;
+            right: -6px;
+            width: 8px;
+            height: 8px;
+            background: var(--yuan_accent);
+            border-radius: 50%;
+        }
+
+        .yuan_tab-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* ========== 演示说明 ========== */
+        .yuan_demo-section {
+            background: var(--yuan_card);
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-top: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+        }
+
+        .yuan_demo-section h3 {
+            font-size: 16px;
+            color: var(--yuan_primary);
+            margin-bottom: 16px;
+        }
+
+        .yuan_demo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--yuan_border);
+        }
+
+        .yuan_demo-item:last-child {
+            border-bottom: none;
+        }
+
+        .yuan_demo-item .yuan_svg-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--yuan_primary);
+        }
+
+        .yuan_demo-item span {
+            font-size: 14px;
+            color: var(--yuan_text);
+        }
+
+        .yuan_demo-item .yuan_demo-tag {
+            margin-left: auto;
+            font-size: 12px;
+            color: var(--yuan_accent);
+            background: rgba(231, 76, 60, .1);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* ========== 代码说明区域 ========== */
+        .yuan_code-section {
+            background: var(--yuan_primary);
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-top: 24px;
+            color: #fff;
+        }
+
+        .yuan_code-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--yuan_accent);
+        }
+
+        .yuan_code-section pre {
+            background: rgba(0,0,0,.3);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Cascadia Code", "Consolas", monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .yuan_code-section .yuan_comment { color: #7f8c8d; }
+        .yuan_code-section .yuan_tag { color: #3498db; }
+        .yuan_code-section .yuan_attr { color: #e67e22; }
+        .yuan_code-section .yuan_value { color: #27ae60; }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 360px) {
+            .yuan_icon-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="yuan_nav">
+        <div class="yuan_nav-title">iconfont SVG 图标</div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="yuan_container">
+
+        <!-- 页面标题 -->
+        <header class="yuan_page-header">
+            <h1>移动端底部导航</h1>
+            <p>使用 iconfont SVG Symbol 实现固定底部导航栏</p>
+        </header>
+
+        <!-- 介绍卡片 -->
+        <div class="yuan_card">
+            <h3>SVG Symbol 特点</h3>
+            <p>通过 SVG use 引用 symbol 图标，支持多色图标，可通过 fill 控制颜色，矢量清晰，适合复杂图标。</p>
+            <div class="yuan_icon-grid">
+                <div class="yuan_icon-item">
+                    <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-shouye-zhihui"></use></svg>
+                    <span>首页</span>
+                </div>
+                <div class="yuan_icon-item">
+                    <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-faxian"></use></svg>
+                    <span>发现</span>
+                </div>
+                <div class="yuan_icon-item">
+                    <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-xinzeng"></use></svg>
+                    <span>新增</span>
+                </div>
+                <div class="yuan_icon-item">
+                    <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-wode"></use></svg>
+                    <span>我的</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 演示说明 -->
+        <div class="yuan_demo-section">
+            <h3>导航项说明</h3>
+            <div class="yuan_demo-item">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-shouye-zhihui"></use></svg>
+                <span>首页</span>
+                <span class="yuan_demo-tag">当前页</span>
+            </div>
+            <div class="yuan_demo-item">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-faxian"></use></svg>
+                <span>发现</span>
+                <span class="yuan_demo-tag">红点提醒</span>
+            </div>
+            <div class="yuan_demo-item">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-xinzeng"></use></svg>
+                <span>新增</span>
+                <span class="yuan_demo-tag">数字徽章</span>
+            </div>
+            <div class="yuan_demo-item">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-wode"></use></svg>
+                <span>我的</span>
+                <span class="yuan_demo-tag">数字徽章</span>
+            </div>
+        </div>
+
+        <!-- 代码说明 -->
+        <div class="yuan_code-section">
+            <h3>核心代码</h3>
+            <pre><span class="yuan_comment">&lt;!-- 引入 iconfont JS --&gt;</span>
+<span class="yuan_tag">&lt;script</span> <span class="yuan_attr">src</span>=<span class="yuan-value">"font/iconfont.js"</span><span class="yuan-tag">&gt;&lt;/script&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 使用 SVG Symbol --&gt;</span>
+<span class="yuan_tag">&lt;svg</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"yuan_svg-icon"</span><span class="yuan-tag">&gt;</span>
+  <span class="yuan_tag">&lt;use</span> <span class="yuan_attr">xlink:href</span>=<span class="yuan-value">"#icon-shouye-zhihui"</span><span class="yuan-tag">&gt;&lt;/use&gt;</span>
+<span class="yuan_tag">&lt;/svg&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 数字徽章 --&gt;</span>
+<span class="yuan_tag">&lt;span</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"yuan_tab-badge"</span><span class="yuan-tag">&gt;</span>5<span class="yuan_tag">&lt;/span&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 红点 --&gt;</span>
+<span class="yuan_tag">&lt;span</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"yuan_tab-dot"</span><span class="yuan-tag">&gt;&lt;/span&gt;</span></pre>
+        </div>
+
+    </main>
+
+    <!-- 底部导航栏 -->
+    <nav class="yuan_tabbar">
+        <a href="javascript:void(0)" class="yuan_tab-item yuan_active">
+            <span class="yuan_tab-icon">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-shouye-zhihui"></use></svg>
+            </span>
+            <span class="yuan_tab-label">首页</span>
+        </a>
+        <a href="javascript:void(0)" class="yuan_tab-item">
+            <span class="yuan_tab-icon">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-faxian"></use></svg>
+                <span class="yuan_tab-dot"></span>
+            </span>
+            <span class="yuan_tab-label">发现</span>
+        </a>
+        <a href="javascript:void(0)" class="yuan_tab-item">
+            <span class="yuan_tab-icon">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-xinzeng"></use></svg>
+                <span class="yuan_tab-badge">5</span>
+            </span>
+            <span class="yuan_tab-label">新增</span>
+        </a>
+        <a href="javascript:void(0)" class="yuan_tab-item">
+            <span class="yuan_tab-icon">
+                <svg class="yuan_svg-icon" aria-hidden="true"><use xlink:href="#icon-wode"></use></svg>
+                <span class="yuan_tab-badge">12</span>
+            </span>
+            <span class="yuan_tab-label">我的</span>
+        </a>
+    </nav>
+
+</body>
+</html>

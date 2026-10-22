@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-1 Font Awesome 字体图标</title>
+    <link rel="stylesheet" href="cdn/fontawesome-all.min.css">
+    <style>
+        :root {
+            --yuan_primary: #2c3e50;
+            --yuan_accent: #e74c3c;
+            --yuan_bg: #ecf0f1;
+            --yuan_card: #ffffff;
+            --yuan_text: #34495e;
+            --yuan_muted: #7f8c8d;
+            --yuan_radius: 12px;
+            --yuan_shadow: 0 4px 24px rgba(44, 62, 80, .12);
+            --yuan_spacing: 24px;
+            --yuan_transition: .3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--yuan_bg);
+            color: var(--yuan_text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ========== 导航栏 ========== */
+        .yuan_nav {
+            background: var(--yuan_primary);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .yuan_logo {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .yuan_logo span {
+            color: var(--yuan_accent);
+        }
+
+        .yuan_nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .yuan_nav-links a {
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--yuan_transition);
+        }
+
+        .yuan_nav-links a:hover {
+            color: #fff;
+        }
+
+        /* ========== Hero 区域 ========== */
+        .yuan_hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: linear-gradient(135deg, var(--yuan_primary) 0%, #34495e 100%);
+            color: #fff;
+        }
+
+        .yuan_hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 16px;
+            letter-spacing: -.02em;
+        }
+
+        .yuan_hero p {
+            font-size: 18px;
+            opacity: .85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .yuan_hero .yuan_highlight {
+            color: var(--yuan_accent);
+            font-weight: 700;
+        }
+
+        /* ========== 内容区域 ========== */
+        .yuan_container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .yuan_section-title {
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: var(--yuan_primary);
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .yuan_section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 2px;
+            background: var(--yuan_accent);
+        }
+
+        /* ========== 图标网格 ========== */
+        .yuan_icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .yuan_icon-card {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--yuan_shadow);
+            transition: var(--yuan_transition);
+            border: 1px solid rgba(44,62,80,.08);
+        }
+
+        .yuan_icon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(44,62,80,.18);
+        }
+
+        .yuan_icon-card i {
+            font-size: 36px;
+            color: var(--yuan_primary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .yuan_icon-card span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+            display: block;
+        }
+
+        /* ========== 尺寸演示 ========== */
+        .yuan_size-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_size-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_size-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_size-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_size-item {
+            text-align: center;
+        }
+
+        .yuan_size-item i {
+            display: block;
+            color: var(--yuan_accent);
+            margin-bottom: 8px;
+        }
+
+        .yuan_size-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 颜色演示 ========== */
+        .yuan_color-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_color-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_color-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_color-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_color-item {
+            text-align: center;
+        }
+
+        .yuan_color-item i {
+            display: block;
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_color-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 动画演示 ========== */
+        .yuan_anim-demo {
+            background: var(--yuan_card);
+            border-radius: var(--yuan_radius);
+            padding: 40px;
+            box-shadow: var(--yuan_shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .yuan_anim-demo h3 {
+            color: var(--yuan_primary);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .yuan_anim-demo p {
+            color: var(--yuan_muted);
+            margin-bottom: 28px;
+        }
+
+        .yuan_anim-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .yuan_anim-item {
+            text-align: center;
+        }
+
+        .yuan_anim-item i {
+            display: block;
+            font-size: 40px;
+            color: var(--yuan_primary);
+            margin-bottom: 8px;
+        }
+
+        .yuan_anim-item span {
+            font-size: 12px;
+            color: var(--yuan_muted);
+        }
+
+        /* ========== 代码说明区域 ========== */
+        .yuan_code-section {
+            background: var(--yuan_primary);
+            border-radius: var(--yuan_radius);
+            padding: 36px;
+            color: #fff;
+        }
+
+        .yuan_code-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--yuan_accent);
+        }
+
+        .yuan_code-section pre {
+            background: rgba(0,0,0,.3);
+            padding: 24px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Cascadia Code", "Consolas", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .yuan_code-section .yuan_comment { color: #7f8c8d; }
+        .yuan_code-section .yuan_tag { color: #3498db; }
+        .yuan_code-section .yuan_attr { color: #e67e22; }
+        .yuan_code-section .yuan_value { color: #27ae60; }
+
+        /* ========== 页脚 ========== */
+        .yuan_footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: var(--yuan_muted);
+            font-size: 14px;
+            border-top: 1px solid rgba(44,62,80,.1);
+        }
+
+        .yuan_footer strong {
+            color: var(--yuan_primary);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .yuan_nav { padding: 14px 20px; }
+            .yuan_nav-links { display: none; }
+            .yuan_hero { padding: 50px 20px 40px; }
+            .yuan_container { padding: 40px 16px 60px; }
+            .yuan_icon-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            .yuan_size-demo, .yuan_color-demo, .yuan_anim-demo { padding: 24px; }
+            .yuan_code-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="yuan_nav">
+        <a class="yuan_logo" href="index.html">袁磊<span>·</span>Font Awesome</a>
+        <ul class="yuan_nav-links">
+            <li><a href="#yuan_icons">图标库</a></li>
+            <li><a href="#yuan_code">代码</a></li>
+            <li><a href="index.html">返回首页</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="yuan_hero">
+        <h1>Font Awesome <span class="yuan_highlight">字体图标</span></h1>
+        <p>用 <strong>袁磊</strong> 的方式学习 Font Awesome — 通过 CSS 类名调用矢量字体图标，简单高效。</p>
+    </header>
+
+    <main class="yuan_container">
+
+        <!-- 图标网格 -->
+        <h2 class="yuan_section-title" id="yuan_icons">常用图标</h2>
+        <div class="yuan_icon-grid">
+            <div class="yuan_icon-card"><i class="fas fa-home"></i><span>fa-home</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-user"></i><span>fa-user</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart"></i><span>fa-heart</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-star"></i><span>fa-star</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-search"></i><span>fa-search</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cog"></i><span>fa-cog</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-envelope"></i><span>fa-envelope</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-camera"></i><span>fa-camera</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-music"></i><span>fa-music</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-video"></i><span>fa-video</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-file"></i><span>fa-file</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-folder"></i><span>fa-folder</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cloud"></i><span>fa-cloud</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bell"></i><span>fa-bell</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-calendar"></i><span>fa-calendar</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-map-marker-alt"></i><span>fa-map-marker</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-phone"></i><span>fa-phone</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-shopping-cart"></i><span>fa-shopping-cart</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-credit-card"></i><span>fa-credit-card</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-lock"></i><span>fa-lock</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-unlock"></i><span>fa-unlock</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-trash"></i><span>fa-trash</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-edit"></i><span>fa-edit</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-share"></i><span>fa-share</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-download"></i><span>fa-download</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-upload"></i><span>fa-upload</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-link"></i><span>fa-link</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-image"></i><span>fa-image</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-gamepad"></i><span>fa-gamepad</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-car"></i><span>fa-car</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-plane"></i><span>fa-plane</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-utensils"></i><span>fa-utensils</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-coffee"></i><span>fa-coffee</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bicycle"></i><span>fa-bicycle</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-book"></i><span>fa-book</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-graduation-cap"></i><span>fa-graduation-cap</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-code"></i><span>fa-code</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-terminal"></i><span>fa-terminal</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-database"></i><span>fa-database</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-server"></i><span>fa-server</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-wifi"></i><span>fa-wifi</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bluetooth"></i><span>fa-bluetooth</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-battery-full"></i><span>fa-battery-full</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-sun"></i><span>fa-sun</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-moon"></i><span>fa-moon</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-tree"></i><span>fa-tree</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-fire"></i><span>fa-fire</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-tint"></i><span>fa-tint</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-paw"></i><span>fa-paw</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-globe"></i><span>fa-globe</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-flag"></i><span>fa-flag</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-trophy"></i><span>fa-trophy</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-gift"></i><span>fa-gift</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-glass-martini"></i><span>fa-glass-martini</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-helicopter"></i><span>fa-helicopter</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-rocket"></i><span>fa-rocket</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-ghost"></i><span>fa-ghost</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-skull"></i><span>fa-skull</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bug"></i><span>fa-bug</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-robot"></i><span>fa-robot</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-alien"></i><span>fa-alien</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-hat-wizard"></i><span>fa-hat-wizard</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-magic"></i><span>fa-magic</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-dice"></i><span>fa-dice</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-chess"></i><span>fa-chess</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-puzzle-piece"></i><span>fa-puzzle-piece</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-futbol"></i><span>fa-futbol</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-basketball-ball"></i><span>fa-basketball</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-football-ball"></i><span>fa-football</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-swimmer"></i><span>fa-swimmer</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-dumbbell"></i><span>fa-dumbbell</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-hiking"></i><span>fa-hiking</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-campground"></i><span>fa-campground</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-mountain"></i><span>fa-mountain</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-umbrella-beach"></i><span>fa-umbrella</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-snowflake"></i><span>fa-snowflake</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-wind"></i><span>fa-wind</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-smog"></i><span>fa-smog</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-rainbow"></i><span>fa-rainbow</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cloud-sun"></i><span>fa-cloud-sun</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cloud-moon"></i><span>fa-cloud-moon</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cloud-rain"></i><span>fa-cloud-rain</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cloud-showers-heavy"></i><span>fa-cloud-showers</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bolt"></i><span>fa-bolt</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-temperature-high"></i><span>fa-temperature-high</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-temperature-low"></i><span>fa-temperature-low</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-thermometer"></i><span>fa-thermometer</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-stethoscope"></i><span>fa-stethoscope</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-syringe"></i><span>fa-syringe</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-pills"></i><span>fa-pills</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-first-aid"></i><span>fa-first-aid</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heartbeat"></i><span>fa-heartbeat</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-dna"></i><span>fa-dna</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-microscope"></i><span>fa-microscope</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-flask"></i><span>fa-flask</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-atom"></i><span>fa-atom</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-satellite"></i><span>fa-satellite</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-user-astronaut"></i><span>fa-user-astronaut</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-space-shuttle"></i><span>fa-space-shuttle</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-meteor"></i><span>fa-meteor</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-eclipse"></i><span>fa-eclipse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-comet"></i><span>fa-comet</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-star-of-life"></i><span>fa-star-of-life</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-infinity"></i><span>fa-infinity</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-compass"></i><span>fa-compass</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-map"></i><span>fa-map</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-location-arrow"></i><span>fa-location-arrow</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-directions"></i><span>fa-directions</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-route"></i><span>fa-route</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-traffic-light"></i><span>fa-traffic-light</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-stopwatch"></i><span>fa-stopwatch</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-hourglass"></i><span>fa-hourglass</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-clock"></i><span>fa-clock</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-history"></i><span>fa-history</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-undo"></i><span>fa-undo</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-redo"></i><span>fa-redo</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-sync"></i><span>fa-sync</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-spinner"></i><span>fa-spinner</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-circle-notch"></i><span>fa-circle-notch</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cog fa-spin"></i><span>fa-cog fa-spin</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-sun fa-spin"></i><span>fa-sun fa-spin</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-star fa-spin"></i><span>fa-star fa-spin</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart fa-beat"></i><span>fa-heart fa-beat</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bell fa-bounce"></i><span>fa-bell fa-bounce</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-arrow-right fa-fade"></i><span>fa-arrow-right fa-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-check fa-beat-fade"></i><span>fa-check fa-beat-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-exclamation fa-flip"></i><span>fa-exclamation fa-flip</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-shuffle fa-shake"></i><span>fa-shuffle fa-shake</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart fa-pulse"></i><span>fa-heart fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-spinner fa-pulse"></i><span>fa-spinner fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-circle-notch fa-spin"></i><span>fa-circle-notch fa-spin</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cog fa-pulse"></i><span>fa-cog fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-sun fa-pulse"></i><span>fa-sun fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-star fa-pulse"></i><span>fa-star fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart fa-beat"></i><span>fa-heart fa-beat</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bell fa-bounce"></i><span>fa-bell fa-bounce</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-arrow-right fa-fade"></i><span>fa-arrow-right fa-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-check fa-beat-fade"></i><span>fa-check fa-beat-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-exclamation fa-flip"></i><span>fa-exclamation fa-flip</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-shuffle fa-shake"></i><span>fa-shuffle fa-shake</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart fa-pulse"></i><span>fa-heart fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-spinner fa-pulse"></i><span>fa-spinner fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-circle-notch fa-spin"></i><span>fa-circle-notch fa-spin</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-cog fa-pulse"></i><span>fa-cog fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-sun fa-pulse"></i><span>fa-sun fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-star fa-pulse"></i><span>fa-star fa-pulse</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-heart fa-beat"></i><span>fa-heart fa-beat</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-bell fa-bounce"></i><span>fa-bell fa-bounce</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-arrow-right fa-fade"></i><span>fa-arrow-right fa-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-check fa-beat-fade"></i><span>fa-check fa-beat-fade</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-exclamation fa-flip"></i><span>fa-exclamation fa-flip</span></div>
+            <div class="yuan_icon-card"><i class="fas fa-shuffle fa-shake"></i><span>fa-shuffle fa-shake</span></div>
+        </div>
+
+        <!-- 尺寸演示 -->
+        <div class="yuan_size-demo">
+            <h3>图标尺寸</h3>
+            <p>通过 CSS 的 font-size 属性控制图标大小</p>
+            <div class="yuan_size-row">
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 16px;"></i>
+                    <span>16px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 24px;"></i>
+                    <span>24px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 32px;"></i>
+                    <span>32px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 48px;"></i>
+                    <span>48px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 64px;"></i>
+                    <span>64px</span>
+                </div>
+                <div class="yuan_size-item">
+                    <i class="fas fa-star" style="font-size: 96px;"></i>
+                    <span>96px</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 颜色演示 -->
+        <div class="yuan_color-demo">
+            <h3>图标颜色</h3>
+            <p>通过 CSS 的 color 属性控制图标颜色</p>
+            <div class="yuan_color-row">
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #e74c3c;"></i>
+                    <span>红色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #e67e22;"></i>
+                    <span>橙色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #f1c40f;"></i>
+                    <span>黄色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #27ae60;"></i>
+                    <span>绿色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #3498db;"></i>
+                    <span>蓝色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #9b59b6;"></i>
+                    <span>紫色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #1abc9c;"></i>
+                    <span>青色</span>
+                </div>
+                <div class="yuan_color-item">
+                    <i class="fas fa-heart" style="color: #34495e;"></i>
+                    <span>深蓝</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 动画演示 -->
+        <div class="yuan_anim-demo">
+            <h3>图标动画</h3>
+            <p>Font Awesome 内置多种动画效果</p>
+            <div class="yuan_anim-row">
+                <div class="yuan_anim-item">
+                    <i class="fas fa-cog fa-spin"></i>
+                    <span>fa-spin</span>
+                </div>
+                <div class="yuan_anim-item">
+                    <i class="fas fa-heart fa-beat"></i>
+                    <span>fa-beat</span>
+                </div>
+                <div class="yuan_anim-item">
+                    <i class="fas fa-bell fa-bounce"></i>
+                    <span>fa-bounce</span>
+                </div>
+                <div class="yuan_anim-item">
+                    <i class="fas fa-exclamation fa-flip"></i>
+                    <span>fa-flip</span>
+                </div>
+                <div class="yuan_anim-item">
+                    <i class="fas fa-shuffle fa-shake"></i>
+                    <span>fa-shake</span>
+                </div>
+                <div class="yuan_anim-item">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                    <span>fa-pulse</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 代码说明 -->
+        <div class="yuan_code-section" id="yuan_code">
+            <h3>核心代码</h3>
+            <pre><span class="yuan_comment">&lt;!-- 引入 Font Awesome CSS --&gt;</span>
+<span class="yuan_tag">&lt;link</span> <span class="yuan_attr">rel</span>=<span class="yuan-value">"stylesheet"</span> <span class="yuan_attr">href</span>=<span class="yuan-value">"cdn/fontawesome-all.min.css"</span><span class="yuan_tag">&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 使用字体图标 --&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"fas fa-home"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"fas fa-heart"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"far fa-star"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"fab fa-github"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+
+<span class="yuan_comment">&lt;!-- 添加动画效果 --&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"fas fa-cog fa-spin"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span>
+<span class="yuan_tag">&lt;i</span> <span class="yuan_attr">class</span>=<span class="yuan-value">"fas fa-heart fa-beat"</span><span class="yuan-tag">&gt;&lt;/i&gt;</span></pre>
+        </div>
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="yuan_footer">
+        <p><strong>袁磊</strong> · 526 · 《高级网页设计》课堂实践 · 第 13 讲 Font Awesome 字体图标</p>
+    </footer>
+
+</body>
+</html>
