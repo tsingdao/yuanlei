@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15-1 数七游戏</title>
+    <!-- 姓名：袁磊，日期：2026-10-26，功能名称：数七游戏——100个盒子按规则显示 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #101426;
+            color: #e8ecf6;
+            min-height: 100vh;
+            padding: 40px 16px;
+        }
+
+        .yl_wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .yl_header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .yl_header h1 {
+            font-size: 30px;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            color: #ffd479;
+        }
+
+        .yl_header p {
+            font-size: 14px;
+            line-height: 1.9;
+            color: #9aa5c0;
+        }
+
+        .yl_header .yl_author {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 14px;
+            border: 1px solid #3a4666;
+            border-radius: 999px;
+            font-size: 13px;
+            color: #c8d2ea;
+        }
+
+        .yl_legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: #9aa5c0;
+        }
+
+        .yl_legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .yl_dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .yl_dot.yl_empty_dot {
+            background: #1c2340;
+            border: 2px dashed #ff7a6b;
+        }
+
+        .yl_dot.yl_num_dot {
+            background: #1c2340;
+            border: 2px solid #4d5b85;
+        }
+
+        .yl_stats {
+            text-align: center;
+            font-size: 14px;
+            color: #c8d2ea;
+            margin-bottom: 22px;
+        }
+
+        .yl_stats strong { color: #ffd479; }
+
+        .yl_boxes {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+        }
+
+        .yl_box {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 16px;
+            border-radius: 10px;
+            background: #1c2340;
+            border: 2px solid #4d5b85;
+            color: #e8ecf6;
+            user-select: none;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .yl_box:hover { transform: translateY(-3px); }
+
+        .yl_box.yl_pass {
+            border: 2px dashed #ff7a6b;
+            background: #241d2e;
+            cursor: help;
+        }
+
+        .yl_footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #7a86a5;
+        }
+
+        @media (max-width: 600px) {
+            .yl_boxes { gap: 6px; }
+            .yl_box { font-size: 12px; border-radius: 7px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="yl_wrap">
+        <header class="yl_header">
+            <h1>数七游戏</h1>
+            <p>规则：从 1 数到 100，遇到 <strong>7 的倍数</strong> 或 <strong>含数字 7 的数</strong>（末尾是 7、七十几个等）要“过”——<br>下面满足规则的盒子显示为<strong>空盒子</strong>，不满足规则的盒子内部显示数字。</p>
+            <span class="yl_author">姓名：袁磊</span>
+        </header>
+
+        <div class="yl_legend">
+            <span><i class="yl_dot yl_num_dot"></i>不满足规则：显示数字</span>
+            <span><i class="yl_dot yl_empty_dot"></i>满足规则：空盒子（悬停可看原因）</span>
+        </div>
+
+        <p class="yl_stats" id="yl_stats"></p>
+
+        <div class="yl_boxes" id="yl_boxes"></div>
+
+        <footer class="yl_footer">姓名：袁磊，日期：2026-10-26，功能名称：数七游戏</footer>
+    </div>
+
+    <script>
+        // 判断是否满足“数七”规则：7 的倍数，或数字中含 7（末尾是 7、十位是 7 等）
+        function yl_isPass(yl_n) {
+            return yl_n % 7 === 0 || String(yl_n).indexOf("7") !== -1;
+        }
+
+        // 生成满足规则的原因提示
+        function yl_reason(yl_n) {
+            var yl_reasons = [];
+            if (yl_n % 7 === 0) { yl_reasons.push(yl_n + " 是 7 的倍数"); }
+            if (yl_n % 10 === 7) { yl_reasons.push(yl_n + " 末尾是 7"); }
+            else if (String(yl_n).indexOf("7") !== -1) { yl_reasons.push(yl_n + " 含数字 7"); }
+            return yl_reasons.join("，");
+        }
+
+        // 渲染 100 个盒子
+        var yl_boxesBox = document.getElementById("yl_boxes");
+        var yl_html = "";
+        var yl_passCount = 0;
+        var yl_numCount = 0;
+
+        for (var yl_i = 1; yl_i <= 100; yl_i++) {
+            if (yl_isPass(yl_i)) {
+                yl_passCount++;
+                yl_html += '<div class="yl_box yl_pass" title="' + yl_reason(yl_i) + ' → 过"></div>';
+            } else {
+                yl_numCount++;
+                yl_html += '<div class="yl_box">' + yl_i + '</div>';
+            }
+        }
+        yl_boxesBox.innerHTML = yl_html;
+
+        // 统计信息
+        document.getElementById("yl_stats").innerHTML =
+            "共 100 个盒子：空盒子（过）<strong>" + yl_passCount + "</strong> 个，数字盒子 <strong>" + yl_numCount + "</strong> 个";
+    </script>
+</body>
+</html>
